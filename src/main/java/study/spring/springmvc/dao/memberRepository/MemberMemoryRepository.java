@@ -1,2 +1,4 @@
-package study.spring.springmvc.dao.memberRepository;public class MemberMemoryRepository {
+package study.spring.springmvc.dao.memberRepository;
+
+public class MemberMemoryRepository {
 }
