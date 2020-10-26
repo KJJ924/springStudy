@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
     @GetMapping("/")
     public String wellComePage(){
+        System.out.println("sad");
         return "wellComePage";
     }
 }
