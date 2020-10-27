@@ -1,5 +1,6 @@
 package study.spring.springmvc.dto.member;
 
+// Model(Business Logic)
 public class Member {
     Long DB_ID;
     String id;
@@ -18,7 +19,6 @@ public class Member {
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }

@@ -1,0 +1,16 @@
+package study.spring.springmvc.controller.login;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class SignController {
+
+    @GetMapping("/signform")
+    public String signPage(){
+        System.out.println("signForm");
+        return "signForm";
+    }
+
+
+}
