@@ -12,15 +12,18 @@
 </head>
 <body>
 <h1>로그인 </h1>
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <td><input type="text" name="id"></td>
-    </tr>
-    <tr>
-        <th>PW</th>
-        <td><input type="password" name="pw"></td>
-    </tr>
-</table>
+<form method="post">
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <td><input type="text" name="id"></td>
+        </tr>
+        <tr>
+            <th>PW</th>
+            <td><input type="password" name="pw"></td>
+        </tr>
+    </table>
+    <input type="submit" value="로그인">
+</form>
 </body>
 </html>
