@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>로그인 </h1>
-<form method="post">
+<form method="post" action="/loginPost">
     <table border="1">
         <tr>
             <th>ID</th>
