@@ -8,4 +8,5 @@ public interface MemberRepository {
     void save(Member member);
     Member getMember(Long id);
     List<Member> allMembers();
+    Long editMember(Member member,Long id);
 }

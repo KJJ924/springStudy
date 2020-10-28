@@ -31,4 +31,10 @@ public class MemberMemoryRepository implements MemberRepository {
         keys.forEach(key -> members.add(memberRepository.get(key)));
         return members;
     }
+
+    @Override
+    public Long editMember(Member editMember, Long id) {
+        memberRepository.replace(id, editMember);
+        return editMember.getDB_ID();
+    }
 }

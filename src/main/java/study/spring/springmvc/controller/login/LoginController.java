@@ -39,9 +39,9 @@ public class LoginController {
     public String loginValidation(HttpSession session, Member member){
         Long validation = service.validation(member);
         if (validation!=-1L) {
-            SessionConfig.getSessionIdCheck("test", String.valueOf(validation));
+            SessionConfig.getSessionIdCheck("UserDB_id", String.valueOf(validation));
             System.out.println("성공");
-            session.setAttribute("test", validation);
+            session.setAttribute("UserDB_id", validation);
             return "redirect:/loginResult";
         }
         return "redirect:/loginResult";

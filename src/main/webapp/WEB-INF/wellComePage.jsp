@@ -14,7 +14,7 @@
 <body>
 <h1>wellComePage</h1>
 <c:choose>
-    <c:when test="${not empty test}">
+    <c:when test="${not empty UserDB_id}">
         <a href="/logOut">로그아웃</a>
     </c:when>
     <c:otherwise>

@@ -13,8 +13,9 @@
 </head>
 <body>
     <c:choose>
-        <c:when test="${not empty test}">
+        <c:when test="${not empty UserDB_id}">
             <h1>로그인성공</h1>
+            <a href="/memberEdit">회원정보 수정하기</a>
             <a href="/logOut">로그아웃</a>
             <a href="/">wellComePage 로 가기</a>
         </c:when>

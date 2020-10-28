@@ -34,4 +34,13 @@ public class MemberService implements IMemberService{
     public List<Member> getMembers() {
         return repository.allMembers();
     }
+
+    @Override
+    public void editMember(Member member, Long DB_Id) {
+        if(member.getName() !=null && member.getDB_ID() !=null && member.getId() !=null){
+            repository.editMember(member,DB_Id);
+        }
+        else
+            System.out.println("edit 실패 ");
+    }
 }

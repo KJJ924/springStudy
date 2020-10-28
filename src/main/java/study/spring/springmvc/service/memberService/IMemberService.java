@@ -8,5 +8,6 @@ public interface IMemberService {
     void memberSave(Member member);
     Member getMember(Long id);
     List<Member> getMembers();
+    void editMember(Member member , Long DB_Id);
 
 }

@@ -1,4 +1,4 @@
-package study.spring.springmvc.controller.signUp;
+package study.spring.springmvc.controller.MemberController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class SignUpController {
 
     @GetMapping("/signUp")
     public String showSignUpPage(){
-        return "/signUp/SignUp";
+        return "/Member/signUp/SignUp";
     }
     @PostMapping("/signUpMember")
     public String joinMember(@ModelAttribute Member member , RedirectAttributes attributes){
@@ -31,7 +31,7 @@ public class SignUpController {
 
     @GetMapping("/signUpResult")
     public String resultPage(){
-        return "/signUp/resultSignUp";
+        return "/Member/signUp/resultSignUp";
     }
 
 }

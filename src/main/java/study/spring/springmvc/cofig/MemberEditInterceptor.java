@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class MemberEditInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle");
         HttpSession session = request.getSession();
-
-//        if(session.getAttribute("test") == null){
-//            response.sendRedirect("/loginForm");
-//            return false;
-//        }
+        if(session.getAttribute("UserDB_id") == null){
+            response.sendRedirect("/loginForm");
+            return false;
+        }
         return true;
     }
 

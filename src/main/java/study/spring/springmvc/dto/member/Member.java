@@ -6,7 +6,15 @@ public class Member {
     String id;
     String pw;
     String name;
+    String age;
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public Long getDB_ID() {
         return DB_ID;
