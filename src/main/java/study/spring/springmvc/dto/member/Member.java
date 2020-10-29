@@ -24,6 +24,17 @@ public class Member {
     @Min(1)
     String age;
 
+    public Member( @NotNull @NotEmpty String id, @NotNull @NotEmpty String pw, @NotNull @NotEmpty String name, @NotNull @NotEmpty @Min(1) String age) {
+        this.id = id;
+        this.pw = pw;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Member() {
+    }
+
+
     public String getAge() {
         return age;
     }
@@ -62,4 +73,5 @@ public class Member {
     public void setName(String name) {
         this.name = name;
     }
+
 }

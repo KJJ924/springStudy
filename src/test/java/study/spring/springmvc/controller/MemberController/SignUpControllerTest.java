@@ -46,7 +46,7 @@ class SignUpControllerTest {
         mockMvc.perform(post("/signUpMember")
                 .param("name","")
                 .param("id","kjj")
-                .param("age","25")
+                .param("age","-1")
                 .param("pw","123"))
         .andDo(print())
         .andExpect(model().hasErrors());

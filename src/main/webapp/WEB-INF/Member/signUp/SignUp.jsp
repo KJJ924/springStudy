@@ -17,7 +17,7 @@
     <c:if test="${errors.hasFieldErrors('name')}">
         <spring:message
                 code="${errors.getFieldError('name').codes[0]}"
-                text="${errors.getFieldError('name' ).defaultMessage}"
+                text="${errors.getFieldError('name').defaultMessage}"
         />
     </c:if>
     <c:if test="${errors.hasFieldErrors('age')}">
