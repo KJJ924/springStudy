@@ -2,6 +2,8 @@ package study.spring.springmvc.controller.MemberController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,13 @@ public class SignUpController {
         return "/Member/signUp/SignUp";
     }
     @PostMapping("/signUpMember")
-    public String joinMember(@ModelAttribute Member member , RedirectAttributes attributes){
+    public String joinMember(@Validated @ModelAttribute Member member , BindingResult result, RedirectAttributes attributes){
+        if(result.hasErrors()){
+            result.getAllErrors().forEach(objectError -> {
+                System.out.println(objectError.getDefaultMessage());
+            });
+            return "/Member/signUp/SignUp";
+        }
         service.memberSave(member);
         attributes.addFlashAttribute("member",member);
         return "redirect:/signUpResult";

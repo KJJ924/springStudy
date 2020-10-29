@@ -1,11 +1,27 @@
 package study.spring.springmvc.dto.member;
 
+import study.spring.springmvc.controller.MemberController.SignUpController;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 // Model(Business Logic)
 public class Member {
+
     Long DB_ID;
+    @NotNull
+    @NotEmpty
     String id;
+    @NotNull
+    @NotEmpty
     String pw;
+    @NotNull
+    @NotEmpty
     String name;
+    @NotNull
+    @NotEmpty
+    @Min(1)
     String age;
 
     public String getAge() {
