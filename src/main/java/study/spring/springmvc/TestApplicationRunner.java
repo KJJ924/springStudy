@@ -1,0 +1,22 @@
+package study.spring.springmvc;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
+import study.spring.springmvc.dao.memberRepository.MemberRepository;
+import study.spring.springmvc.dto.member.Member;
+
+@Component
+public class TestApplicationRunner  implements ApplicationRunner {
+
+    @Autowired
+    MemberRepository repository;
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        Member member = new Member("kjj","123","김재준","25");
+        Member member1 = new Member("ckr","123","조경록","99");
+        repository.save(member);
+        repository.save(member1);
+    }
+}
