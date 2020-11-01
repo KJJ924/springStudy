@@ -10,8 +10,6 @@ import org.springframework.stereotype.Repository;
 import study.spring.springmvc.dto.member.Member;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +18,7 @@ import java.util.Map;
 @Primary
 public class MemberJdbcRepository implements  MemberRepository {
 
-    private JdbcTemplate template;
+    private final JdbcTemplate template;
 
     @Autowired
     public MemberJdbcRepository(DataSource dataSource) {
@@ -38,21 +36,19 @@ public class MemberJdbcRepository implements  MemberRepository {
         parameters.put("name",member.getName());
         parameters.put("age",member.getAge());
 
-        Number number = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
+       jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
     }
 
     @Override
     public Member getMember(Long id) {
         System.out.println(id);
         List<Member> query = template.query("select * from member where db_id = ?", memberRowMapper(),id);
-        Member member = query.stream().findAny().get();
-        return member;
+        return query.stream().findAny().get();
     }
 
     @Override
     public List<Member> allMembers() {
-        List<Member> memberList = template.query("select *from member", memberRowMapper());
-        return memberList;
+        return template.query("select *from member", memberRowMapper());
     }
 
     @Override
