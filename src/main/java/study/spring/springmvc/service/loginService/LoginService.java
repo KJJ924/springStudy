@@ -3,16 +3,17 @@ package study.spring.springmvc.service.loginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import study.spring.springmvc.dao.memberRepository.MemberMemoryRepository;
+import study.spring.springmvc.dao.memberRepository.MemberRepository;
 import study.spring.springmvc.dto.member.Member;
 
 import java.util.List;
 
 @Service
 public class LoginService implements ILoginService{
-    MemberMemoryRepository repository;
+    MemberRepository repository;
 
     @Autowired
-    public LoginService(MemberMemoryRepository repository) {
+    public LoginService(MemberRepository repository) {
         this.repository = repository;
     }
 

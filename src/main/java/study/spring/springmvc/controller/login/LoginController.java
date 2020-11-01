@@ -42,6 +42,7 @@ public class LoginController {
             SessionConfig.getSessionIdCheck("UserDB_id", String.valueOf(validation));
             System.out.println("성공");
             session.setAttribute("UserDB_id", validation);
+            System.out.println(validation);
             return "redirect:/loginResult";
         }
         return "redirect:/loginResult";
