@@ -10,7 +10,9 @@ public class BeautyShop {
     private String storeName;
     private String local;
     private String phoneNumber;
+    //one to many 관계
     private List<Designer> designerList;
+    //one to many 관계
     private List<Member> memberList;
     private Menu menu;
 
