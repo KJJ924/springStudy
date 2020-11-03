@@ -43,6 +43,7 @@ public class MemberJdbcRepository implements  MemberRepository {
     public Member getMember(Long id) {
         System.out.println(id);
         List<Member> query = template.query("select * from member where db_id = ?", memberRowMapper(),id);
+        // findAny 리턴 타입 Optional 로 리턴하는 게 안전하긴함 -> NULL 값 리턴할 수 도 있어서.
         return query.stream().findAny().get();
     }
 
