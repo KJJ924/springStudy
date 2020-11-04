@@ -12,7 +12,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>폼 추가/삭제 예제</title>
+    <title>메뉴판 등록 !</title>
 
     <script type="text/javascript">
         var count = 0;

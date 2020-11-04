@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>미용실 생성 폼!!!</title>
 </head>
 <body>
 <form action="/BeautyShop" method="post">
