@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: rlawo
@@ -12,7 +13,17 @@
 </head>
 <body>
     <table>
-        <tr>여기만들어봐여,</tr>
+        <tr>
+            <td>미용실 이름 :${shop.storeName}</td><br><br><br><br>
+            <td>미용실 주소 :${shop.local}</td><br><br><br><br><br>
+            <td>미용실 전번 :${shop.phoneNumber}</td><br><br><br><br><br>
+            <c:forEach var="entry" items="${shop.menu.menu}" varStatus="status">
+                <td>미용실 메뉴 : ${entry.key}</td><br><br><br><br>
+                <td>가격: ${entry.value}</td><br><br><br><br>
+            </c:forEach>
+
+        </tr>
+
     </table>
 </body>
 </html>

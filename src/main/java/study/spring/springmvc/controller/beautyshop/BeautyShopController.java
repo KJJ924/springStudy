@@ -9,6 +9,7 @@ import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,15 @@ public class BeautyShopController {
     }
     @PostMapping("/registerDesigner")
     public String createDesigner(Designer designers ,@SessionAttribute("shop") BeautyShop shop){
+        //임시
+        // 컨트롤러에서 리스트로 받아야하는데 단일객체로밖에 못받음.
+        // shop에 디자이너를 set하려면 리스트로 set해야하기때문에 중간에 list로 어쩔수없이 add
+        List<Designer> designerList =new ArrayList<>();
+        designerList.add(designers);
+        //
+
+
+        shop.setDesignerList(designerList);
         System.out.println(designers);
         return "redirect:/test";
     }

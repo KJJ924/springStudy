@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <th>미용실 전화번호</th>
-            <td><input type="tel" name="phonNumber" ></td>
+            <td><input type="tel" name="phoneNumber" ></td>
         </tr>
     </table>
 
