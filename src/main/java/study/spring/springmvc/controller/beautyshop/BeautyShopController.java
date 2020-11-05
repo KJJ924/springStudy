@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
+import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@SessionAttributes("shop")
+@SessionAttributes({"shop"})
 public class BeautyShopController {
     @GetMapping("/test")
     public String showTest(){
@@ -35,10 +36,19 @@ public class BeautyShopController {
         menu.setMenu(map);
         menu.setBeautyShop(shop);
         shop.setMenu(menu);
-        System.out.println(shop.getStoreName());
+        System.out.println(shop.getDesignerList());
         status.isComplete();
         model.addAttribute(shop);
         return "beautyShop/createResultPage";
+    }
+    @GetMapping("/registerDesigner")
+    public String registerDesignerForm(){
+        return "beautyShop/designer";
+    }
+    @PostMapping("/registerDesigner")
+    public String createDesigner(Designer designers ,@SessionAttribute("shop") BeautyShop shop){
+        System.out.println(designers);
+        return "redirect:/test";
     }
     @GetMapping("/BeautyShop")
     public String showBeautyShopPage(){
@@ -47,7 +57,7 @@ public class BeautyShopController {
     @PostMapping("/BeautyShop")
     public String createShop(@ModelAttribute BeautyShop shop ,Model model){
         model.addAttribute("shop",shop);
-        return "redirect:/test";
+        return "redirect:/registerDesigner";
     }
 
 
