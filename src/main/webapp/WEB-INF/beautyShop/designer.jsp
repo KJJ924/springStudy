@@ -19,8 +19,8 @@
         function addForm(){
             var addedFormDiv = document.getElementById("addedFormDiv");
             var str = "";
-            str+="<br>디자이너 이름-"+count+" <input type='text' name='name'>";
-            str+="<br>특기-"+count+" <input type='text' name='specialty'>";
+            str+="<br>디자이너 이름-"+count+" <input type='text' name='designerList["+count+"].name'>";
+            str+="<br>특기-"+count+" <input type='text' name='designerList["+count+"].specialty'>";
             // 추가할 폼(에 들어갈 HTML)
             var addedDiv = document.createElement("div"); // 폼 생성
             addedDiv.id = "added_"+count; // 폼 Div에 ID 부여 (삭제를위해)

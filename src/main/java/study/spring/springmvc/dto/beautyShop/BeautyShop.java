@@ -84,4 +84,17 @@ public class BeautyShop {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "BeautyShop{" +
+                "DB_Id=" + DB_Id +
+                ", storeName='" + storeName + '\'' +
+                ", local='" + local + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", designerList=" + designerList +
+                ", memberList=" + memberList +
+                ", menu=" + menu +
+                '}';
+    }
 }

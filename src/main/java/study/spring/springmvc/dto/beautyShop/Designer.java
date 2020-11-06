@@ -42,4 +42,14 @@ public class Designer {
     public void setBeautyShop(BeautyShop beautyShop) {
         this.beautyShop = beautyShop;
     }
+
+    @Override
+    public String toString() {
+        return "Designer{" +
+                "name='" + name + '\'' +
+                ", specialty='" + specialty + '\'' +
+                ", orders=" + orders +
+                ", beautyShop=" + beautyShop +
+                '}';
+    }
 }

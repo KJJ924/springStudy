@@ -46,32 +46,36 @@ public class BeautyShopController {
     public String registerDesignerForm(){
         return "beautyShop/designer";
     }
-    @PostMapping("/registerDesigner")
-    public String createDesigner(Designer designer, @SessionAttribute("shop") BeautyShop shop, Model model,
-                                 @RequestParam List<String> name, @RequestParam List<String> speciality){
-        //임시
-        // 컨트롤러에서 리스트로 받아야하는데 단일객체로밖에 못받음.
-        // shop에 디자이너를 set하려면 리스트로 set해야하기때문에 중간에 list로 어쩔수없이 add
-        // 객체를 리스트화 한다???
-        List<Designer> designerList = new ArrayList<>();
 
-        // 생각했던거
-        // 그냥 앞단에서 무조건 입력받게 한다고 가정하고 리스트로 다받아옴
-        // 요소 하나씩꺼내서 set 한뒤 리스트에 추가
-        // 그걸 shop에 set
-        // jsp에서 꺼낸다.
-        // 근데 생각대로안됨.
-        // 오류뜸
-        // Required List parameter 'speciality' is not present ??
-        for(int i=0; i<name.size(); i++){
+    /*2020-11-06 컨트롤분석하세여 ㅋㅋ
+        중첩커맨드객체 로 받으면됨 위에 하지마세요 (JSP 참조)
+         */
+    @PostMapping("/registerDesigner")
+    public String createDesigner(@ModelAttribute BeautyShop getOnlyDesignerList,
+                                 @SessionAttribute("shop") BeautyShop shop ){
+        /*임시
+         컨트롤러에서 리스트로 받아야하는데 단일객체로밖에 못받음.
+         shop에 디자이너를 set하려면 리스트로 set해야하기때문에 중간에 list로 어쩔수없이 add
+         객체를 리스트화 한다???*/
+
+//        List<Designer> designerList = new ArrayList<>();
+
+       /*  생각했던거
+         그냥 앞단에서 무조건 입력받게 한다고 가정하고 리스트로 다받아옴
+         요소 하나씩꺼내서 set 한뒤 리스트에 추가
+         그걸 shop에 set
+         jsp에서 꺼낸다.
+         근데 생각대로안됨.
+         오류뜸
+         Required List parameter 'speciality' is not present ??*/
+
+        /*
+            for(int i=0; i<name.size(); i++){
             designer.setName(name.get(i));
             designer.setSpecialty(speciality.get(i));
             designerList.add(designer);
-        }
-
-        shop.setDesignerList(designerList);
-        System.out.println(designer);
-        model.addAttribute(shop);
+        }*/
+        shop.setDesignerList(getOnlyDesignerList.getDesignerList());
         return "redirect:/test";
     }
     @GetMapping("/BeautyShop")
