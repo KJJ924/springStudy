@@ -31,10 +31,30 @@ public class JdbcShopRepository implements BeautyShopRepository {
         parameters.put("name",designer.getName());
         parameters.put("specialty",designer.getSpecialty());
         parameters.put("beautyShop_id",designer.getBeautyShop().getDB_Id());
+        jdbcInsert.execute(parameters);
     }
 
     @Override
     public void beautyShopSave(BeautyShop beautyShop) {
+        // 이 부분 조금 애매함 미용실 저장 메소드인데 디자이너를 넘겨주는 행동 같이하고 있음.
+        // 나중에 컨트롤러에서 서비스로 보내면서 분리하여 해결하면 더 좋을듯 함
+        List<Designer> designerList = beautyShop.getDesignerList();
+        for(Designer designer : designerList)
+            designerSave(designer);
+
+        //미용실 저장부분
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
+        jdbcInsert.withTableName("BeautyShop").usingGeneratedKeyColumns("db_id");
+        Map<String,Object> parameters = new HashMap<>();
+        parameters.put("store_name",beautyShop.getStoreName());
+        parameters.put("local",beautyShop.getLocal());
+        parameters.put("tel_number",beautyShop.getPhoneNumber());
+        parameters.put("menu",beautyShop.getMenu().getDB_id());
+
+        // 어떻게 저장해야될지  잘몰르겠음..
+        parameters.put("Designer_list",beautyShop.getDesignerList());
+        parameters.put("Member_list",beautyShop.getMemberList());
+        jdbcInsert.execute(parameters);
 
     }
 

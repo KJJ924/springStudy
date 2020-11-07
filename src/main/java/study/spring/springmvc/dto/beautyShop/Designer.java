@@ -3,7 +3,7 @@ package study.spring.springmvc.dto.beautyShop;
 import java.util.List;
 
 public class Designer {
-
+    private Long id;
     private String name;
     private String specialty;
     //one to many 관계
