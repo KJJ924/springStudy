@@ -1,4 +1,4 @@
-package study.spring.springmvc.dao.memberRepository;
+package study.spring.springmvc.dao.BeautyRepository;
 
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
