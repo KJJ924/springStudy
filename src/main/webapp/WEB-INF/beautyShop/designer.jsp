@@ -19,6 +19,7 @@
         function addForm(){
             var addedFormDiv = document.getElementById("addedFormDiv");
             var str = "";
+            // input name에 속성명[idx].속성 으로 지정하면 VO 객체에서 List 형태로 받을수 있댄다. 신기하네..
             str+="<br>디자이너 이름-"+count+" <input type='text' name='designerList["+count+"].name'>";
             str+="<br>특기-"+count+" <input type='text' name='designerList["+count+"].specialty'>";
             // 추가할 폼(에 들어갈 HTML)
