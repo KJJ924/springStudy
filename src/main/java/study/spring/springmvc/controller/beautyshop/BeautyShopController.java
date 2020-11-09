@@ -1,5 +1,6 @@
 package study.spring.springmvc.controller.beautyshop;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
+import study.spring.springmvc.service.BeautyShopService.BeautyShopService;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -17,6 +19,13 @@ import java.util.Map;
 @Controller
 @SessionAttributes({"shop"})
 public class BeautyShopController {
+    private BeautyShopService beautyShopService;
+
+    @Autowired
+    public BeautyShopController(BeautyShopService beautyShopService) {
+        this.beautyShopService = beautyShopService;
+    }
+
     @GetMapping("/test")
     public String showTest(){
         return "/beautyShop/menu";
@@ -40,6 +49,9 @@ public class BeautyShopController {
         System.out.println(shop.getDesignerList());
         status.isComplete();
         model.addAttribute(shop);
+
+        // 서비스 ->shop 넘겨주면 알아서 shop 있는 객체들 나뉘어서 저장하는 흐름으로 개발.
+        beautyShopService.saveFactoryBeautyShopService(shop);
 
         return "beautyShop/createResultPage";
     }
