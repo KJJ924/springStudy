@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Repository
 public class JdbcShopRepository implements BeautyShopRepository {
@@ -64,11 +65,17 @@ public class JdbcShopRepository implements BeautyShopRepository {
 
     @Override
     public void menuSave(Menu menu) {
-
+        //메뉴 저장하는거 개빡셈.
+        // DB 구조 생각좀 해야될듯 ? ->  메뉴 이름 , 가격인데 테이블 한 로우 한번에포함?
+        // 아니면 로우 계속생성?
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
+        jdbcInsert.withTableName("menu").usingGeneratedKeyColumns("DB_id");
+        Map<String,Object> parameters = new HashMap<>();
     }
 
     @Override
     public List<BeautyShop> getAllBeautyShopList() {
+        // 가져 올때 조인 써서 한번에 다 가져와야됨  RowMapper 다시만들어야함
         String sql = "select * from BeautyShop";
         return template.query(sql, beautyShopRowMapper());
     }
