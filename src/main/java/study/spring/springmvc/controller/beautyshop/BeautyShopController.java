@@ -40,6 +40,7 @@ public class BeautyShopController {
         System.out.println(shop.getDesignerList());
         status.isComplete();
         model.addAttribute(shop);
+
         return "beautyShop/createResultPage";
     }
     @GetMapping("/registerDesigner")
