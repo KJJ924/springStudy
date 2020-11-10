@@ -9,6 +9,7 @@ import study.spring.springmvc.dto.beautyShop.Menu;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class BeautyShopService {
@@ -40,8 +41,11 @@ public class BeautyShopService {
     }
     private void saveMenu(BeautyShop shop){
         Menu menu = shop.getMenu();
-        menu.setBeautyShop(shop);
-        beautyShopRepository.menuSave(menu);
+        Map<String, Integer> menu1 = menu.getMenu();
+        Set<String> strings = menu1.keySet();
+        strings.forEach(s ->{
+            beautyShopRepository.menuSave(s,menu1.get(s),shop.getDB_Id());
+        });
     }
 
 }
