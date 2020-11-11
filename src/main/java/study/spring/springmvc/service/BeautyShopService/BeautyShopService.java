@@ -47,5 +47,10 @@ public class BeautyShopService {
     public List<BeautyShop> getBeautyShops() {
         return beautyShopRepository.getAllBeautyShopList();
     }
+
+    public BeautyShop getBeautyShop(Long id){
+        // id 에 해당하는 미용실을 리턴헤야함.
+        return beautyShopRepository.getBeautyShop(id);
+    }
 }
 
