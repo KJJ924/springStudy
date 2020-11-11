@@ -3,7 +3,9 @@ package study.spring.springmvc.dao.BeautyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
@@ -14,10 +16,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class JdbcShopRepository implements BeautyShopRepository {
@@ -29,15 +28,28 @@ public class JdbcShopRepository implements BeautyShopRepository {
     }
 
     @Override
-    public void designerSave(Designer designer) {
-        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
+    public void designerSave(List<Designer> designers) {
+        /*SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
         jdbcInsert.withTableName("designer").usingGeneratedKeyColumns("id");
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", designer.getName());
         parameters.put("specialty", designer.getSpecialty());
         parameters.put("beautyShop_id", designer.getBeautyShop().getDB_Id());
-        jdbcInsert.execute(parameters);
+        jdbcInsert.execute(parameters);*/
+        String sql = "insert into designer (name,specialty,beautyShop) values(?,?,?) ";
+        template.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                    ps.setString(1,designers.get(i).getName());
+                    ps.setString(2,designers.get(i).getSpecialty());
+                    ps.setString(3,"변경될 값");
+            }
+            @Override
+            public int getBatchSize() {
+                return designers.size();
+            }
+        });
     }
 
     @Override
@@ -70,26 +82,28 @@ public class JdbcShopRepository implements BeautyShopRepository {
         // DB 구조 생각좀 해야될듯 ? ->  메뉴 이름 , 가격인데 테이블 한 로우 한번에포함?
         // 아니면 로우 계속생성?
         Map<String, Integer> menu1 = menu.getMenu();
+        List<String> menuItems = new ArrayList<>();
+        List<Integer> prices = new ArrayList<>();
         //일단 뷰티샵 ID 저장할때 바로 못가져오니깐 0으로 선언하고 KEY값 변경 생각해봐야됨
         Long shopID = 0L;
-
         String sql = "insert into menu(menu_item,price,shop_id)  values (?,?,?)";
         for (final Map.Entry<String, Integer> entry : menu1.entrySet()) {
-            template.batchUpdate(sql, new BatchPreparedStatementSetter() {
-                @Override
-                public void setValues(PreparedStatement ps, int i) throws SQLException {
-                    ps.setString(1,entry.getKey());
-                    ps.setLong(2,entry.getValue());
-                    ps.setLong(3,shopID);
-                }
-                @Override
-                public int getBatchSize() {
-                    return menu1.size();
-                }
-            });
+            menuItems.add(entry.getKey());
+            prices.add(entry.getValue());
         }
 
-
+        template.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1,menuItems.get(i));
+                ps.setLong(2,prices.get(i));
+                ps.setLong(3,shopID);
+            }
+            @Override
+            public int getBatchSize() {
+                return menu1.size();
+            }
+        });
     }
 
     @Override
@@ -97,6 +111,21 @@ public class JdbcShopRepository implements BeautyShopRepository {
         // 가져 올때 조인 써서 한번에 다 가져와야됨  RowMapper 다시만들어야함
 //        String sql = "select * from BeautyShop";
 //        template.query(sql, beautyShopRowMapper());
+        // 일단 그냥 미용실 테이블 만 가져와서 목록 만들어보세여(BeautyShop 객체를 만들라는 뜻
+        // ->미용실 이름, 로컬, 핸드폰번호만) 일단 !
+        // -> 목록에 뿌려질떄는 1 .미용실 이름 - >클릭하면 미용실 주소와 핸드폰 번호가 보이는
+        // 상세페이지 구현
+        // 1. BeautyShop 객체를 만든다 ->  DB에 접근해서 모든 미용실 객체를 List 담는다.
+        // 2. 생성한 List 반환 -> BeautyShopService 로 가져간다
+        // 3. BeautyShopService 에서 List 받은후  컨트롤러로  전달
+        // 4. 컨트롤러 에서 받은 List 를 Model and view 생성하여 Jsp 넘기는데  1번 확인
+        // 5. get요청으로 게시판을 클릭 했을때 다시 컨트롤러에 요청 보낸뒤 클릭한 미용실에 맞는
+        // 6. 상세 정보를 가져온뒤 보여준다.
+        // 7. getBeautyShop 만든다 (select * from BeautyShop where Db_id = ?)
+        // 8. 가져온 BeautyShop 을 다시 서비스로 보낸다.(getBeautyShop 맞는 서비스생성)
+        // 9. 컨트롤러에서 가져온 미용실을 jsp model 에 담아서 전달.
+
+        // 추가 . 로그인한 손님만 미용실 리스트를 보여준다 -> 세션활용(핸들러 인터셉터) 하면좋아요 ㅎ
         return null;
     }
 
