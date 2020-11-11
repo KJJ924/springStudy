@@ -41,11 +41,8 @@ public class BeautyShopService {
     }
     private void saveMenu(BeautyShop shop){
         Menu menu = shop.getMenu();
-        Map<String, Integer> menu1 = menu.getMenu();
-        Set<String> strings = menu1.keySet();
-        strings.forEach(s ->{
-            beautyShopRepository.menuSave(s,menu1.get(s),shop.getDB_Id());
-        });
+        menu.setBeautyShop(shop);
+         beautyShopRepository.menuSave(menu);
+        }
     }
 
-}

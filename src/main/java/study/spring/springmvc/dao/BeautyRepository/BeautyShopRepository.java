@@ -9,6 +9,6 @@ import java.util.List;
 public interface BeautyShopRepository {
     void designerSave(Designer designer);
     void beautyShopSave(BeautyShop beautyShop);
-    void menuSave(String menuItem,int price,Long shopDBId);
+    void menuSave(Menu menu);
     List<BeautyShop> getAllBeautyShopList();
 }

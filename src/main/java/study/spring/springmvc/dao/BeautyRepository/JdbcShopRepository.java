@@ -1,6 +1,7 @@
 package study.spring.springmvc.dao.BeautyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -10,6 +11,7 @@ import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -62,19 +64,31 @@ public class JdbcShopRepository implements BeautyShopRepository {
         jdbcInsert.execute(parameters);
 
     }
-
     @Override
-    public void menuSave(String menuItem,int price,Long shopDBId) {
+    public void menuSave(Menu menu) {
         //메뉴 저장하는거 개빡셈.
         // DB 구조 생각좀 해야될듯 ? ->  메뉴 이름 , 가격인데 테이블 한 로우 한번에포함?
         // 아니면 로우 계속생성?
-        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
-        jdbcInsert.withTableName("menu").usingGeneratedKeyColumns("DB_id");
-        Map<String ,Object> parameters = new HashMap<>();
-        parameters.put("menu_item",menuItem);
-        parameters.put("price",price);
-        parameters.put("shop_id",shopDBId);
-        jdbcInsert.execute(parameters);
+        Map<String, Integer> menu1 = menu.getMenu();
+        //일단 뷰티샵 ID 저장할때 바로 못가져오니깐 0으로 선언하고 KEY값 변경 생각해봐야됨
+        Long shopID = 0L;
+
+        String sql = "insert into menu(menu_item,price,shop_id)  values (?,?,?)";
+        for (final Map.Entry<String, Integer> entry : menu1.entrySet()) {
+            template.batchUpdate(sql, new BatchPreparedStatementSetter() {
+                @Override
+                public void setValues(PreparedStatement ps, int i) throws SQLException {
+                    ps.setString(1,entry.getKey());
+                    ps.setLong(2,entry.getValue());
+                    ps.setLong(3,shopID);
+                }
+                @Override
+                public int getBatchSize() {
+                    return menu1.size();
+                }
+            });
+        }
+
 
     }
 
