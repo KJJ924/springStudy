@@ -108,9 +108,11 @@ public class JdbcShopRepository implements BeautyShopRepository {
 
     @Override
     public List<BeautyShop> getAllBeautyShopList() {
+
         // 가져 올때 조인 써서 한번에 다 가져와야됨  RowMapper 다시만들어야함
-//        String sql = "select * from BeautyShop";
-//        template.query(sql, beautyShopRowMapper());
+        String sql = "select * from BeautyShop";
+        return template.query(sql, beautyShopRowMapper());
+
         // 일단 그냥 미용실 테이블 만 가져와서 목록 만들어보세여(BeautyShop 객체를 만들라는 뜻
         // ->미용실 이름, 로컬, 핸드폰번호만) 일단 !
         // -> 목록에 뿌려질떄는 1 .미용실 이름 - >클릭하면 미용실 주소와 핸드폰 번호가 보이는
@@ -126,7 +128,6 @@ public class JdbcShopRepository implements BeautyShopRepository {
         // 9. 컨트롤러에서 가져온 미용실을 jsp model 에 담아서 전달.
 
         // 추가 . 로그인한 손님만 미용실 리스트를 보여준다 -> 세션활용(핸들러 인터셉터) 하면좋아요 ㅎ
-        return null;
     }
 
     private RowMapper<BeautyShop> beautyShopRowMapper() {
