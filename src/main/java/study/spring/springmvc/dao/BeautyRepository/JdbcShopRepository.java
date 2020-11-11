@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
+import study.spring.springmvc.dto.member.Member;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -106,6 +107,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
         });
     }
 
+
     @Override
     public List<BeautyShop> getAllBeautyShopList() {
 
@@ -128,6 +130,17 @@ public class JdbcShopRepository implements BeautyShopRepository {
         // 9. 컨트롤러에서 가져온 미용실을 jsp model 에 담아서 전달.
 
         // 추가 . 로그인한 손님만 미용실 리스트를 보여준다 -> 세션활용(핸들러 인터셉터) 하면좋아요 ㅎ
+    }
+
+    @Override
+    public BeautyShop getBeautyShop(Long db_ID) {
+        // db_ID를 어디서 가져오지??
+
+        String sql = "select * from BeautyShop where DB_Id = ?";
+
+        List<BeautyShop> query = template.query(sql, beautyShopRowMapper(), db_ID);
+        // ?? 이게뭐지 findany, get>??????????
+        return query.stream().findAny().get();
     }
 
     private RowMapper<BeautyShop> beautyShopRowMapper() {
