@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
@@ -32,9 +33,19 @@ public class BeautyShopController {
     }
 
     @GetMapping("/beautyShopList")
-    public String beautyShopList(){
-        beautyShopService.getBeautyShops();
-        return "/beautyShop/beautyShopList";
+    public ModelAndView beautyShopList(){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("shops", beautyShopService.getBeautyShops());
+        mv.setViewName("/beautyShop/beautyShopList");
+        return mv;
+    }
+
+    @PostMapping("/beautyShopDetailPage")
+    public ModelAndView beautyShopDetailPage(@RequestParam Long beautyDB_id){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("shops", beautyShopService.getBeautyShop(beautyDB_id));
+        mv.setViewName("/beautyShop/beautyShopDetailPage");
+        return mv;
     }
 
     @PostMapping("/test")
