@@ -11,4 +11,5 @@ public interface BeautyShopRepository {
     void beautyShopSave(BeautyShop beautyShop);
     void menuSave(Menu menu);
     List<BeautyShop> getAllBeautyShopList();
+    BeautyShop getBeautyShop(Long db_ID);
 }
