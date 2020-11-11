@@ -31,6 +31,12 @@ public class BeautyShopController {
         return "/beautyShop/menu";
     }
 
+    @GetMapping("/beautyShopList")
+    public String beautyShopList(){
+        beautyShopService.getBeautyShops();
+        return "/beautyShop/beautyShopList";
+    }
+
     @PostMapping("/test")
     public String manyParam(@RequestParam("menu_title")List<String> menuTitleList,
                             @RequestParam("menu_price")List<Integer> menuPriceList,
