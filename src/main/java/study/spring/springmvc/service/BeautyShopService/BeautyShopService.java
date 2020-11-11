@@ -23,7 +23,7 @@ public class BeautyShopService {
     // 컨트롤러에서 미용실 save 할라면 이 메서드만 불러주면됨.
     // Service 에서 미용실 다 받은 뒤 여기서 분배
     // shop 을 통쨰로 넘겨서 메서드 내에서 처리하는것이 더 편함.
-    public void saveFactoryBeautyShopService(BeautyShop shop){
+    public void saveFactoryBeautyShopService(BeautyShop shop) {
         //미용실 객체 저장
         beautyShopRepository.beautyShopSave(shop);
         //디자이너 저장
@@ -32,14 +32,20 @@ public class BeautyShopService {
         saveMenu(shop);
     }
 
-    private void saveDesigner(BeautyShop shop){
+    private void saveDesigner(BeautyShop shop) {
         List<Designer> designerList = shop.getDesignerList();
         beautyShopRepository.designerSave(designerList);
     }
-    private void saveMenu(BeautyShop shop){
+
+    private void saveMenu(BeautyShop shop) {
         Menu menu = shop.getMenu();
         menu.setBeautyShop(shop);
-         beautyShopRepository.menuSave(menu);
-        }
+        beautyShopRepository.menuSave(menu);
+
     }
+
+    public List<BeautyShop> getBeautyShops() {
+        return beautyShopRepository.getAllBeautyShopList();
+    }
+}
 
