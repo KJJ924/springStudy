@@ -139,7 +139,9 @@ public class JdbcShopRepository implements BeautyShopRepository {
         String sql = "select * from BeautyShop where DB_Id = ?";
 
         List<BeautyShop> query = template.query(sql, beautyShopRowMapper(), db_ID);
-        // ?? 이게뭐지 findany, get>??????????
+        // ?? 이게뭐지 findany, get>?????????? -> java 8 optional 보시면되요
+        // return type 은 optional 로 한번 감싸서 보내는게 안전해요
+        // 만약 null 값이 return 되면 nullPoint 오류 떠서 안전하게 한번 랩핑하는 것
         return query.stream().findAny().get();
     }
 

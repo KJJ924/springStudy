@@ -24,7 +24,10 @@
                 <%-- 고려해야할것. hidden으로 하면 shop마다 db_id가 다를텐데, 그걸 다 같은 이름 hidden form으로 저장하면 안되잖아--%>
                 <%-- 미용실 상세페이지로 갈때 그 미용실의 db_id만 들고올수있게끔 만들어야함.. --%>
                 <%-- 오케이 방법찾은듯 --%>
-                <td><a href="#" onclick="dbIdSubmit(${shop.DB_Id})">${shop.storeName}</a></td>
+                    <%-- row 마다 id가 다른데 굳이 이렇게 할필요 없어요 --%>
+                    <%-- --%>
+<%--                <td><a href="" onclick="dbIdSubmit(${shop.DB_Id})">${shop.storeName}</a></td>--%>
+                <td><a href="/beautyShopDetailPage?id=${shop.DB_Id}">${shop.storeName}</a> </td>
                 <td>${shop.local}</td>
                 <td>${shop.phoneNumber}</td>
             </tr>
