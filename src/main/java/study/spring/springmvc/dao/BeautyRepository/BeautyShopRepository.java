@@ -12,6 +12,6 @@ public interface BeautyShopRepository {
     void menuSave(Menu menu);
     List<BeautyShop> getAllBeautyShopList();
     BeautyShop getBeautyShop(Long db_ID);
-    List<Designer> getDesignerList(Long Db_id);
-    Menu getMenu(Long DB_id);
+    List<Designer> getDesignerList(String shopName);
+    List<Menu> getMenu(String shopName);
 }

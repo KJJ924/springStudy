@@ -143,14 +143,37 @@ public class JdbcShopRepository implements BeautyShopRepository {
     }
 
     @Override
-    public List<Designer> getDesignerList(Long Db_id) {
-        String sql = "select * form Designer where ";
-        return null;
+    public List<Designer> getDesignerList(String shopName) {
+        String sql = "select * form Designer where beautyShopName = ?";
+        return template.query(sql, designerRowMapper(), shopName);
+    }
+
+    private RowMapper<Designer> designerRowMapper(){
+        return ((resultSet, i) -> {
+            Designer designer = new Designer();
+            designer.setSpecialty(resultSet.getString("Specialty"));
+            designer.setName(resultSet.getString("name"));
+            return designer;
+        });
     }
 
     @Override
-    public Menu getMenu(Long DB_id) {
-        return null;
+    public List<Menu> getMenu(String shopName) {
+        String sql = "select * form menu where beautyShopName = ?";
+
+        return template.query(sql,menuRowMapper(),shopName);
+
+    }
+    private RowMapper<Menu> menuRowMapper() {
+        // 설계 잘못해서 망함 ㅋ
+        return (resultSet, i) -> {
+            Menu menu = new Menu();
+            Map<String, Integer> map = new HashMap<>();
+            map.put(resultSet.getString("menu_item"),
+                    resultSet.getInt("price"));
+            menu.setMenu(map);
+            return menu;
+        };
     }
 
     private RowMapper<BeautyShop> beautyShopRowMapper() {
