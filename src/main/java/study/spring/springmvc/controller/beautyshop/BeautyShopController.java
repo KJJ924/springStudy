@@ -42,6 +42,7 @@ public class BeautyShopController {
     @GetMapping("/beautyShopDetailPage")
     public String beautyShopDetailPage(@RequestParam(name="id") Long beautyDB_id, Model model){
         BeautyShop beautyShop = beautyShopService.getBeautyShop(beautyDB_id);
+
         model.addAttribute("shops", beautyShop);
         return "/beautyShop/beautyShopDetailPage";
     }

@@ -7,6 +7,7 @@ import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,6 +52,23 @@ public class BeautyShopService {
     public BeautyShop getBeautyShop(Long id){
         // id 에 해당하는 미용실을 리턴헤야함.
         return beautyShopRepository.getBeautyShop(id);
+    }
+
+    public List<Designer> getDesignerList(String shopName){
+        return beautyShopRepository.getDesignerList(shopName);
+    }
+
+
+    public Map<String,Integer> getMenu(String shopName){
+        // 설계 잘못해서 이딴짓 해야됨..
+        Map<String,Integer> menuMap = new HashMap<>();
+        for (Menu menu : beautyShopRepository.getMenu(shopName)) {
+            Map<String, Integer> menu1 = menu.getMenu();
+            for(Map.Entry<String, Integer> entry : menu1.entrySet()){
+                menuMap.put(entry.getKey(),entry.getValue());
+            }
+        }
+        return menuMap;
     }
 }
 

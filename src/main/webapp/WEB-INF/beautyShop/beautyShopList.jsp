@@ -13,9 +13,9 @@
 </head>
 <body>
     <table border="1">
+        <th>번호</th>
         <th>미용실 이름</th>
         <th>미용실 주소</th>
-        <th>미용실 전번</th>
         <c:forEach var="shop" items="${shops}">
             <tr>
                 <%-- 고려해야할것. hidden으로 하면 shop마다 db_id가 다를텐데, 그걸 다 같은 이름 hidden form으로 저장하면 안되잖아--%>
@@ -24,6 +24,7 @@
                     <%-- row 마다 id가 다른데 굳이 이렇게 할필요 없어요 --%>
                     <%-- --%>
 <%--                <td><a href="" onclick="dbIdSubmit(${shop.DB_Id})">${shop.storeName}</a></td>--%>
+                <td>${shop.DB_Id}</td>
                 <td><a href="/beautyShopDetailPage?id=${shop.DB_Id}">${shop.storeName}</a> </td>
                 <td>${shop.local}</td>
             </tr>
