@@ -12,9 +12,6 @@
     <title>미용실 리스트</title>
 </head>
 <body>
-<form name="hiddenForm" action="/beautyShopDetailPage" method="post">
-    <input type="hidden" name="beautyDB_id" value=""/>
-</form>
     <table border="1">
         <th>미용실 이름</th>
         <th>미용실 주소</th>
@@ -29,7 +26,6 @@
 <%--                <td><a href="" onclick="dbIdSubmit(${shop.DB_Id})">${shop.storeName}</a></td>--%>
                 <td><a href="/beautyShopDetailPage?id=${shop.DB_Id}">${shop.storeName}</a> </td>
                 <td>${shop.local}</td>
-                <td>${shop.phoneNumber}</td>
             </tr>
         </c:forEach>
     </table>
