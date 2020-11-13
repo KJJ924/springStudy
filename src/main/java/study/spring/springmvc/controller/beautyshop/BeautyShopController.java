@@ -33,19 +33,17 @@ public class BeautyShopController {
     }
 
     @GetMapping("/beautyShopList")
-    public ModelAndView beautyShopList(){
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("shops", beautyShopService.getBeautyShops());
-        mv.setViewName("/beautyShop/beautyShopList");
-        return mv;
+    public String beautyShopList(Model model){
+        List<BeautyShop> beautyShops = beautyShopService.getBeautyShops();
+        model.addAttribute("shops",beautyShops);
+        return "/beautyShop/beautyShopList";
     }
 
-    @PostMapping("/beautyShopDetailPage")
-    public ModelAndView beautyShopDetailPage(@RequestParam Long beautyDB_id){
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("shops", beautyShopService.getBeautyShop(beautyDB_id));
-        mv.setViewName("/beautyShop/beautyShopDetailPage");
-        return mv;
+    @GetMapping("/beautyShopDetailPage")
+    public String beautyShopDetailPage(@RequestParam(name="id") Long beautyDB_id, Model model){
+        BeautyShop beautyShop = beautyShopService.getBeautyShop(beautyDB_id);
+        model.addAttribute("shops", beautyShop);
+        return "/beautyShop/beautyShopDetailPage";
     }
 
     @PostMapping("/test")
