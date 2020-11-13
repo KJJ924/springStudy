@@ -144,7 +144,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
 
     @Override
     public List<Designer> getDesignerList(String shopName) {
-        String sql = "select * form Designer where beautyShopName = ?";
+        String sql = "select * from Designer where beautyShopName = ?";
         return template.query(sql, designerRowMapper(), shopName);
     }
 
@@ -160,7 +160,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
 
     @Override
     public List<Menu> getMenu(String shopName) {
-        String sql = "select * form menu where beautyShopName = ?";
+        String sql = "select * from menu where beautyShopName = ?";
 
         return template.query(sql,menuRowMapper(),shopName);
 

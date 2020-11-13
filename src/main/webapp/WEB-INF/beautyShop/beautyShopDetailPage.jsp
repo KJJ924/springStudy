@@ -9,9 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>미용실 정보</title>
+    <title>미용실 상세페이지</title>
 </head>
 <body>
+<h1>${shops.storeName}</h1>
     <table border="1">
         <th>미용실 이름</th>
         <th>미용실 주소</th>
@@ -22,9 +23,6 @@
             <td>${shops.local}</td>
             <td>${shops.phoneNumber}</td>
         </tr>
-
-
-
     </table>
 </body>
 </html>

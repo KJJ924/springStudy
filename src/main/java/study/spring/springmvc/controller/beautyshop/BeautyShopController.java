@@ -12,10 +12,7 @@ import study.spring.springmvc.dto.beautyShop.Menu;
 import study.spring.springmvc.service.BeautyShopService.BeautyShopService;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @SessionAttributes({"shop"})
@@ -42,8 +39,18 @@ public class BeautyShopController {
     @GetMapping("/beautyShopDetailPage")
     public String beautyShopDetailPage(@RequestParam(name="id") Long beautyDB_id, Model model){
         BeautyShop beautyShop = beautyShopService.getBeautyShop(beautyDB_id);
+        List<Designer> designerList = beautyShopService.getDesignerList(beautyShop.getStoreName());
+        Map<String, Integer> menu = beautyShopService.getMenu(beautyShop.getStoreName());
+        Map<String,Object> modelMap = new HashMap<>(){
+            {
+                put("shops",beautyShop);
+                put("designerList",designerList);
+                put("menu",menu);
+            }
+        };
 
-        model.addAttribute("shops", beautyShop);
+        model.addAttribute(modelMap);
+
         return "/beautyShop/beautyShopDetailPage";
     }
 
