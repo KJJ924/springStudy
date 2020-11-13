@@ -3,19 +3,15 @@ package study.spring.springmvc.dao.BeautyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
-import study.spring.springmvc.dto.member.Member;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -29,7 +25,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
     }
 
     @Override
-    public void designerSave(List<Designer> designers) {
+    public void designerSave(List<Designer> designers, BeautyShop shop) {
         /*SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
         jdbcInsert.withTableName("designer").usingGeneratedKeyColumns("id");
 
@@ -38,13 +34,13 @@ public class JdbcShopRepository implements BeautyShopRepository {
         parameters.put("specialty", designer.getSpecialty());
         parameters.put("beautyShop_id", designer.getBeautyShop().getDB_Id());
         jdbcInsert.execute(parameters);*/
-        String sql = "insert into designer (name,specialty,beautyShop) values(?,?,?) ";
+        String sql = "insert into designer (name,specialty,beautyShopName) values(?,?,?) ";
         template.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                     ps.setString(1,designers.get(i).getName());
                     ps.setString(2,designers.get(i).getSpecialty());
-                    ps.setString(3,"변경될 값");
+                    ps.setString(3,shop.getStoreName());
             }
             @Override
             public int getBatchSize() {
@@ -79,15 +75,14 @@ public class JdbcShopRepository implements BeautyShopRepository {
     }
     @Override
     public void menuSave(Menu menu) {
-        //메뉴 저장하는거 개빡셈.
         // DB 구조 생각좀 해야될듯 ? ->  메뉴 이름 , 가격인데 테이블 한 로우 한번에포함?
         // 아니면 로우 계속생성?
+        BeautyShop beautyShop = menu.getBeautyShop();
         Map<String, Integer> menu1 = menu.getMenu();
         List<String> menuItems = new ArrayList<>();
         List<Integer> prices = new ArrayList<>();
         //일단 뷰티샵 ID 저장할때 바로 못가져오니깐 0으로 선언하고 KEY값 변경 생각해봐야됨
-        Long shopID = 0L;
-        String sql = "insert into menu(menu_item,price,shop_id)  values (?,?,?)";
+        String sql = "insert into menu(menu_item,price,beautyShopName)  values (?,?,?)";
         for (final Map.Entry<String, Integer> entry : menu1.entrySet()) {
             menuItems.add(entry.getKey());
             prices.add(entry.getValue());
@@ -98,7 +93,9 @@ public class JdbcShopRepository implements BeautyShopRepository {
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 ps.setString(1,menuItems.get(i));
                 ps.setLong(2,prices.get(i));
-                ps.setLong(3,shopID);
+                // 참조키 미용실 이름으로 변경 - > 원래 이렇게 하면안됨 미용실 이름이 중복될수 있어서
+                // 가정 -> 미용실 이름은 중복되지 않는다.
+                ps.setString(3,beautyShop.getStoreName());
             }
             @Override
             public int getBatchSize() {
@@ -143,6 +140,17 @@ public class JdbcShopRepository implements BeautyShopRepository {
         // return type 은 optional 로 한번 감싸서 보내는게 안전해요
         // 만약 null 값이 return 되면 nullPoint 오류 떠서 안전하게 한번 랩핑하는 것
         return query.stream().findAny().get();
+    }
+
+    @Override
+    public List<Designer> getDesignerList(Long Db_id) {
+        String sql = "select * form Designer where ";
+        return null;
+    }
+
+    @Override
+    public Menu getMenu(Long DB_id) {
+        return null;
     }
 
     private RowMapper<BeautyShop> beautyShopRowMapper() {

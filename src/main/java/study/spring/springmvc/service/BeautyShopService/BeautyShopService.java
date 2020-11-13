@@ -34,7 +34,7 @@ public class BeautyShopService {
 
     private void saveDesigner(BeautyShop shop) {
         List<Designer> designerList = shop.getDesignerList();
-        beautyShopRepository.designerSave(designerList);
+        beautyShopRepository.designerSave(designerList,shop);
     }
 
     private void saveMenu(BeautyShop shop) {
