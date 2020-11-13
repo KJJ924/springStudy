@@ -151,6 +151,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
     private RowMapper<Designer> designerRowMapper(){
         return ((resultSet, i) -> {
             Designer designer = new Designer();
+            designer.setId(resultSet.getLong("id"));
             designer.setSpecialty(resultSet.getString("Specialty"));
             designer.setName(resultSet.getString("name"));
             return designer;
