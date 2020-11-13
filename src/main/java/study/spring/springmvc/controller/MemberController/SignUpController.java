@@ -24,6 +24,7 @@ public class SignUpController {
     public String showSignUpPage(){
         return "/Member/signUp/SignUp";
     }
+
     @PostMapping("/signUpMember")
     public String joinMember(@Validated @ModelAttribute Member member , BindingResult result, RedirectAttributes attributes){
         if(result.hasErrors()){

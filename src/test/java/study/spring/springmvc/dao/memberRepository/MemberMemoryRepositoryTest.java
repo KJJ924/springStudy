@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberMemoryRepositoryTest {
     MemberRepository repository = new MemberMemoryRepository();
+
     @Test
     void save_and_getMember() {
         //given

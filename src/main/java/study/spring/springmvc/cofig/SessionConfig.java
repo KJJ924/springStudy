@@ -19,7 +19,6 @@ public class SessionConfig implements HttpSessionListener {
                 result =  key;
             }
         }
-
         if(!result.equals("")) {
             removeSessionForDoubleLogin(result);
         }
