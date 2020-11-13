@@ -16,13 +16,15 @@
         <th>미용실 이름</th>
         <th>미용실 주소</th>
         <th>미용실 전번</th>
-        <c:forEach var="shop" items="${shops}">
-            <tr>
-                <td>${shop.storeName}</td>
-                <td>${shop.local}</td>
-                <td>${shop.phoneNumber}</td>
-            </tr>
-        </c:forEach>
+
+        <tr>
+            <td>${shops.storeName}</td>
+            <td>${shops.local}</td>
+            <td>${shops.phoneNumber}</td>
+        </tr>
+
+
+
     </table>
 </body>
 </html>
