@@ -40,19 +40,23 @@ public class BeautyShopController {
     public String beautyShopDetailPage(@RequestParam(name="id") Long beautyDB_id, Model model){
         BeautyShop beautyShop = beautyShopService.getBeautyShop(beautyDB_id);
         List<Designer> designerList = beautyShopService.getDesignerList(beautyShop.getStoreName());
-        Map<String, Integer> menu = beautyShopService.getMenu(beautyShop.getStoreName());
-        Map<String,Object> modelMap = new HashMap<>(){
+        Map<String, Integer> menuMap = beautyShopService.getMenu(beautyShop.getStoreName());
+        Menu menu = new Menu();
+        menu.setMenu(menuMap);
+        beautyShop.setDesignerList(designerList);
+        beautyShop.setMenu(menu);
+        /*Map<String,Object> modelMap = new HashMap<>(){
             {
                 put("shops",beautyShop);
                 put("designerList",designerList);
                 put("menu",menu);
             }
-        };
+        };*/
         // 위에 처럼 맵으로 담아서 model 에 넘겨주는데 jsp 에서 어떻게 가져다가 써요? ㅎㅎ
         // 방법 찾고 -> jsp 에 뿌려주세여
         // 맵으로 한이유 ->  일일이 하나씩 model.addAttribute 해도 되는데 그러면 중복코드 3번 생김
-        model.addAttribute(modelMap);
-
+//        model.addAttribute("BeautyShopMap",modelMap);
+        model.addAttribute("beautyShop",beautyShop);
         return "/beautyShop/beautyShopDetailPage";
     }
 
