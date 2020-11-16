@@ -9,7 +9,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html>
 <head>
-    <title>Title</title>
+    <%@ include file="/WEB-INF/includes/header.jsp" %>
+    <link href="/resources/css/signin.css" rel="stylesheet">
+    <title>회원가입</title>
 </head>
 <body>
 
@@ -27,26 +29,27 @@
         />
     </c:if>
 </spring:hasBindErrors>
-<form method="post" action="/signUpMember">
-    <table border="1">
-        <tr>
-            <th>아이디</th>
-            <td><input type="text" name="id"></td>
-        </tr>
-        <tr>
-            <th>패스워드</th>
-            <td><input type="password" name="pw"></td>
-        </tr>
-        <tr>
-            <th>이름</th>
-            <td><input type="text" name="name"></td>
-        </tr>
-        <tr>
-            <th>나이</th>
-            <td><input type="text" name="age"></td>
-        </tr>
-    </table>
-    <input type="submit" value="가입하기">
-</form>
+<div class="container">
+
+    <form class="form-signin" action="/signUpMember" method="post">
+        <h2 class="form-signin-heading">회원가입</h2>
+        <label for="id" class="">ID</label>
+        <input type="text" name="id" id="id" class="form-control" placeholder="Your ID" required autofocus>
+        <label for="pw" class="">Password</label>
+        <input type="password" name="pw" id="pw" class="form-control" placeholder="Your Password" required>
+        <label for="name" class="">Name</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required>
+        <label for="age" class="">Age</label>
+        <input type="number" name="age" id="age" class="form-control" placeholder="Your age" required>
+        <a href="/loginForm">이미 아이디가 있어요!</a><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button>
+    </form>
+
+</div> <!-- /container -->
+<%@ include file="/WEB-INF/includes/footer.jsp" %>
+
 </body>
 </html>
+
+
+
