@@ -12,6 +12,8 @@
     <title>미용실 상세페이지</title>
 </head>
 <body>
+<form action="/beautyShopList" method="post">
+    <input type="hidden" name="beautyShopId" value="${beautyShop.DB_Id}">
 <h1>${beautyShop.storeName}</h1>
     <table border="1">
         <tr>
@@ -28,11 +30,14 @@
 <h2>메뉴판</h2>
     <table border="1">
         <tr>
+            <th>선택</th>
             <th>이름</th>
             <th>가격</th>
         </tr>
         <c:forEach var="menu" items="${beautyShop.menu.menu}">
+
             <tr>
+                <td><input type="radio" name="menuPrice" value="${menu.value}"></td>
                 <td>${menu.key}</td>
                 <td>${menu.value}</td>
             </tr>
@@ -41,17 +46,22 @@
 <h3>미용사</h3>
     <table border="1">
         <tr>
+            <th>선택</th>
             <th>ID</th>
             <th>이름</th>
             <th>특기</th>
         </tr>
         <c:forEach var="designer" items="${beautyShop.designerList}">
         <tr>
+            <td><input type="radio" name="designerId" value="${designer.id}"></td>
             <td>${designer.id}</td>
             <td>${designer.name}</td>
             <td>${designer.specialty}</td>
         </tr>
         </c:forEach>
     </table>
+    예약 날짜 : <input type='date' name='reservationDate'/>
+    <input type="submit" value="예약하기">
+</form>
 </body>
 </html>
