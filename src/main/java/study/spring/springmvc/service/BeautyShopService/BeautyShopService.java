@@ -25,13 +25,8 @@ public class BeautyShopService {
 
     public void saveOrder(Order order, Long UserDB_id){
         order.setCancel(true);
-        order.setDesingerId();
         order.setMemberId(UserDB_id);
-        order.setMenuName();
-        order.setPrice();
         order.setOrderDate(LocalDateTime.now());
-        order.setReservationDate();
-        order.setShopId();
         beautyShopRepository.orderSave(order);
     }
 

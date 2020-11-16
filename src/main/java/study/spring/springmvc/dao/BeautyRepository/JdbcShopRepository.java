@@ -107,9 +107,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
 
     @Override
     public void orderSave(Order order) {
-        String sql = "insert into " +
-                "order_list (Shop_id, menu_name, price, member_id, order_date, cancel, reservation_date)" +
-                " values (?,?,?,?,?,?,?)";
+
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
         jdbcInsert.withTableName("order_list").usingGeneratedKeyColumns("DB_iD");
         Map<String, Object> parameters = new HashMap<>();
