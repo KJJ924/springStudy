@@ -11,6 +11,7 @@ public class Order {
     private String menuName;
     private Integer price;
     private Long memberId;
+    private Long desingerId;
     private LocalDateTime orderDate;
     private boolean cancel;
     private LocalDateTime reservationDate;
@@ -18,11 +19,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long shopId, String menuName, Integer price, Long memberId, LocalDateTime orderDate, boolean cancel, LocalDateTime reservationDate) {
+    public Order(Long shopId, String menuName, Integer price, Long memberId, Long desingerId, LocalDateTime orderDate, boolean cancel, LocalDateTime reservationDate) {
         this.shopId = shopId;
         this.menuName = menuName;
         this.price = price;
         this.memberId = memberId;
+        this.desingerId = desingerId;
         this.orderDate = orderDate;
         this.cancel = cancel;
         this.reservationDate = reservationDate;
@@ -66,6 +68,14 @@ public class Order {
 
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+
+    public Long getDesingerId() {
+        return desingerId;
+    }
+
+    public void setDesingerId(Long desingerId) {
+        this.desingerId = desingerId;
     }
 
     public LocalDateTime getOrderDate() {

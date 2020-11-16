@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
+import study.spring.springmvc.dto.beautyShop.Order;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -104,6 +105,31 @@ public class JdbcShopRepository implements BeautyShopRepository {
         });
     }
 
+    @Override
+    public void orderSave(Order order) {
+        String sql = "insert into " +
+                "order_list (Shop_id, menu_name, price, member_id, order_date, cancel, reservation_date)" +
+                " values (?,?,?,?,?,?,?)";
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
+        jdbcInsert.withTableName("order_list").usingGeneratedKeyColumns("DB_iD");
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("Shop_id", order.getShopId());
+        parameters.put("menu_name", order.getMenuName());
+        parameters.put("price", order.getPrice());
+        parameters.put("member_id", order.getMemberId());
+        parameters.put("order_date", order.getOrderDate());
+        parameters.put("cancel", order.isCancel());
+        parameters.put("reservation_date", order.getReservationDate());
+
+
+//        parameters.put("menu", beautyShop.getMenu().getDB_id());
+
+        // 어떻게 저장해야될지  잘몰르겠음..
+//        parameters.put("Designer_list", beautyShop.getDesignerList());
+//        parameters.put("Member_list", beautyShop.getMemberList());
+        jdbcInsert.execute(parameters);
+
+    }
 
     @Override
     public List<BeautyShop> getAllBeautyShopList() {

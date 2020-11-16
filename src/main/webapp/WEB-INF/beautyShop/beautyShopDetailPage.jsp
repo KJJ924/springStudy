@@ -12,8 +12,8 @@
     <title>미용실 상세페이지</title>
 </head>
 <body>
-<form action="/beautyShopList" method="post">
-    <input type="hidden" name="beautyShopId" value="${beautyShop.DB_Id}">
+<form action="/saveOrderData" method="post">
+    <input type="hidden" name="shopId" value="${beautyShop.DB_Id}">
 <h1>${beautyShop.storeName}</h1>
     <table border="1">
         <tr>
@@ -37,7 +37,10 @@
         <c:forEach var="menu" items="${beautyShop.menu.menu}">
 
             <tr>
-                <td><input type="radio" name="menuPrice" value="${menu.value}"></td>
+                <%-- 메뉴 이름이랑 가격 동시에보내야하는데 당장 생각이 안나므로 그냥 히든으로 --%>
+                <input type="hidden" name="menuName" value="${menu.key}">
+                <input type="hidden" name="price" value="${menu.value}">
+                <td><input type="radio"></td>
                 <td>${menu.key}</td>
                 <td>${menu.value}</td>
             </tr>

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
+import study.spring.springmvc.dto.beautyShop.Order;
 import study.spring.springmvc.service.BeautyShopService.BeautyShopService;
 
 import javax.servlet.http.HttpSession;
@@ -37,12 +38,9 @@ public class BeautyShopController {
         return "/beautyShop/beautyShopList";
     }
 
-    @PostMapping("/beautyShopList")
-    public String beautyShopListAfterOrder(Model model, @RequestParam(name="beautyShopId") Long beautyShopId,
-                                           @RequestParam(name="designerId") Long designerId,
-                                           @RequestParam(name="menuPrice") int menuPrice,
-                                           @RequestParam(name="reservationDate") LocalDateTime reservationDate){
-
+    @PostMapping("/saveOrderData")
+    public String beautyShopListAfterOrder(@ModelAttribute Order order, @SessionAttribute Long UserDB_id, Model model){
+        beautyShopService.saveOrder(order, UserDB_id);
         // service에서 order 나머지값들 세팅(저장) 한뒤 리스트로 다시 복귀
         return "redirect:/beautyShop/beautyShopList";
     }
