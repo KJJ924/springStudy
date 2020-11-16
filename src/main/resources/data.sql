@@ -39,7 +39,8 @@ create table order_list(
     menu_name varchar(255),
     price LONG,
     member_id varchar(255),
-    Date_Time DATETIME,
-    cancel boolean
+    order_date DATETIME,
+    cancel boolean,
+    reservation_date DATETIME
 );
 
