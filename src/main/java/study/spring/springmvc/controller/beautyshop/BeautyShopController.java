@@ -12,6 +12,7 @@ import study.spring.springmvc.dto.beautyShop.Menu;
 import study.spring.springmvc.service.BeautyShopService.BeautyShopService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -34,6 +35,22 @@ public class BeautyShopController {
         List<BeautyShop> beautyShops = beautyShopService.getBeautyShops();
         model.addAttribute("shops",beautyShops);
         return "/beautyShop/beautyShopList";
+    }
+
+    @PostMapping("/beautyShopList")
+    public String beautyShopListAfterOrder(Model model, @RequestParam(name="beautyShopId") Long beautyShopId,
+                                           @RequestParam(name="designerId") Long designerId,
+                                           @RequestParam(name="menuPrice") int menuPrice,
+                                           @RequestParam(name="reservationDate") LocalDateTime reservationDate){
+
+        // service에서 order 나머지값들 세팅(저장) 한뒤 리스트로 다시 복귀
+        return "redirect:/beautyShop/beautyShopList";
+    }
+
+    @GetMapping("/beautyShopOrder")
+    public String beautyShopOrder(){
+
+        return "/beautyShop/beautyShopOrder";
     }
 
     @GetMapping("/beautyShopDetailPage")
