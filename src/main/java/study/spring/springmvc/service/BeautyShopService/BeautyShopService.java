@@ -6,7 +6,9 @@ import study.spring.springmvc.dao.BeautyRepository.BeautyShopRepository;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
+import study.spring.springmvc.dto.beautyShop.Order;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,18 @@ public class BeautyShopService {
     @Autowired
     public BeautyShopService(BeautyShopRepository beautyShopRepository) {
         this.beautyShopRepository = beautyShopRepository;
+    }
+
+    public void saveOrder(Order order, Long UserDB_id){
+        order.setCancel(true);
+        order.setDesingerId();
+        order.setMemberId(UserDB_id);
+        order.setMenuName();
+        order.setPrice();
+        order.setOrderDate(LocalDateTime.now());
+        order.setReservationDate();
+        order.setShopId();
+        beautyShopRepository.orderSave(order);
     }
 
     // 컨트롤러에서 미용실 save 할라면 이 메서드만 불러주면됨.
