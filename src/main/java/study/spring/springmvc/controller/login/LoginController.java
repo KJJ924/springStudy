@@ -12,7 +12,10 @@ import study.spring.springmvc.service.loginService.ILoginService;
 import study.spring.springmvc.service.loginService.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.http.HttpRequest;
 
 @Controller
@@ -36,21 +39,28 @@ public class LoginController {
     }
 
     @PostMapping("/loginPost")
-    public String loginValidation(HttpSession session, Member member){
+    public String loginValidation(HttpSession session, Member member, HttpServletResponse response) throws IOException {
         Long validation = service.validation(member);
         if (validation!=-1L) {
             SessionConfig.getSessionIdCheck("UserDB_id", String.valueOf(validation));
             System.out.println("성공");
             session.setAttribute("UserDB_id", validation);
             System.out.println(validation);
-            return "redirect:/loginResult";
+            return "redirect:/wellComePage";
         }
-        return "redirect:/loginResult";
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('아이디가 없거나 패스워드가 맞지 않아 로그인에 실패하셨습니다.'); </script>");
+        out.flush();
+        return "login/loginForm";
     }
-    @GetMapping("/loginResult")
-    public String goResultPage(){
-        return "login/loginResult";
-    }
+//    loginResult 페이지 불필요 할것 같아서 wellcomePage에 통합함.
+//    @GetMapping("/loginResult")
+//    public String goResultPage(){
+//
+//        return "/wellComePage";
+//    }
+
     @GetMapping("/logOut")
     public String logOut(HttpSession session){
         session.invalidate();
