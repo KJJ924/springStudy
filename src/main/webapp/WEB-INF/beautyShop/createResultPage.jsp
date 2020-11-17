@@ -10,8 +10,10 @@
 <html>
 <head>
     <title>미용실 등록 결과</title>
+    <%@include file="/WEB-INF/includes/header.jsp"%>
 </head>
 <body>
+<%@include file="/WEB-INF/includes/navbar.jsp"%>
     <%-- ${Fisrt.Second} --%>
     <!-- 도트(.) 연산자 혹은 접근 연산자라고 함.
          First : 맵 혹은 자바 빈
@@ -20,7 +22,7 @@
          First가 객체(자바 빈)에 해당하는 경우엔 getter 메소드에 해당하는 Second를 호출한 결과를 반환한다.
          결론 -> 멤버를 직접 참조하는게 아니라 getter 메소드를 통해서 들고온다.
      -->
-    <h1>미용실 상세 정보</h1>
+    <h1 style="margin-top: 100px">미용실 상세 정보</h1>
         <table border="1">
             <tr>
                 <th>미용실 이름</th>
@@ -59,6 +61,7 @@
                 </tr>
             </c:forEach>
         </table>
-
+    <%@include file="/WEB-INF/includes/footer.jsp"%>
 </body>
+
 </html>

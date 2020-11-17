@@ -10,8 +10,11 @@
 <html>
 <head>
     <title>미용실 상세페이지</title>
+    <%@ include file="/WEB-INF/includes/header.jsp"%>
 </head>
 <body>
+<%@ include file="/WEB-INF/includes/navbar.jsp"%>
+<div class="container" style="margin-top: 100px"
 <form action="/saveOrderData" method="post">
     <input type="hidden" name="shopId" value="${beautyShop.DB_Id}">
 <h1>${beautyShop.storeName}</h1>
@@ -66,5 +69,6 @@
     예약 날짜 : <input type='date' name='reservationDate'/>
     <input type="submit" value="예약하기">
 </form>
+<%@ include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>

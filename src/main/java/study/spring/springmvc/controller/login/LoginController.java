@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import study.spring.springmvc.cofig.SessionConfig;
+import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.member.Member;
+import study.spring.springmvc.service.BeautyShopService.BeautyShopService;
 import study.spring.springmvc.service.loginService.ILoginService;
 import study.spring.springmvc.service.loginService.LoginService;
 
@@ -17,19 +19,24 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.http.HttpRequest;
+import java.util.List;
 
 @Controller
 public class LoginController {
 
     ILoginService service;
+    BeautyShopService beautyShopService;
 
     @Autowired
-    public LoginController(ILoginService service) {
+    public LoginController(ILoginService service, BeautyShopService beautyShopService) {
+        this.beautyShopService = beautyShopService;
         this.service = service;
     }
 
     @GetMapping("/")
-    public String wellComePage(){
+    public String wellComePage(Model model){
+        List<BeautyShop> beautyShops = beautyShopService.getBeautyShops();
+        model.addAttribute("shops",beautyShops);
         return "wellComePage";
     }
 

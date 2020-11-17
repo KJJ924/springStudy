@@ -42,9 +42,11 @@
             }
         }
     </script>
+    <%@include file="/WEB-INF/includes/header.jsp"%>
 </head>
 <body onload="addForm();">
-<center>
+<%@include file="/WEB-INF/includes/navbar.jsp"%>
+<div class="container" style="margin-top: 100px">
     <form name="baseForm" action="/registerDesigner" method="post">
         <input type="hidden" name="count" value="0">
         <div id="addedFormDiv"></div><BR> <!-- 폼을 삽입할 DIV -->
@@ -52,6 +54,7 @@
         <input type="Button" value="삭제" onclick="delForm()">
         <input type="Submit" value="완료">
     </form>
-</center>
+</div>
+<%@include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>

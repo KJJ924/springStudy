@@ -12,6 +12,7 @@
     <title>미용실 리스트</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/includes/navbar.jsp"%>
     <table border="1">
         <th>번호</th>
         <th>미용실 이름</th>
@@ -30,12 +31,5 @@
             </tr>
         </c:forEach>
     </table>
-    <script>
-        function dbIdSubmit(db_id){
-            const form = document.hiddenForm;
-            form.beautyDB_id.value = db_id;
-            form.submit();
-        }
-    </script>
 </body>
 </html>

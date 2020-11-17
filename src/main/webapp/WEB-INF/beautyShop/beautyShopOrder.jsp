@@ -9,10 +9,12 @@
 <html>
 <head>
     <title>내 예약현황</title>
+    <%@ include file="/WEB-INF/includes/header.jsp"%>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/includes/navbar.jsp"%>
 버튼하나 따로 만들어서 내 예약현황 볼수있게끔 만들예정.
 
+<%@ include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>

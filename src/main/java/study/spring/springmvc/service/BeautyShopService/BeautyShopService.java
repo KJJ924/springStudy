@@ -23,6 +23,12 @@ public class BeautyShopService {
         this.beautyShopRepository = beautyShopRepository;
     }
 
+    public List<Order> getOrder(){
+        // 수정할거임
+        List<Order> orderList = beautyShopRepository.getOrderList();
+        return null;
+    }
+
     public void saveOrder(Order order, Long UserDB_id){
         order.setMemberId(UserDB_id);
         order.setOrderDate(LocalDateTime.now());

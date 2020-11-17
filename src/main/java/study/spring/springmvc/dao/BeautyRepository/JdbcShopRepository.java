@@ -107,6 +107,14 @@ public class JdbcShopRepository implements BeautyShopRepository {
     }
 
     @Override
+    public List<Order> getOrderList() {
+        // 수정할거임
+        String sql = "select * from order_list where memberId = ?";
+
+        return null;
+    }
+
+    @Override
     public void orderSave(Order order) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
         jdbcInsert.withTableName("order_list").usingGeneratedKeyColumns("DB_iD");

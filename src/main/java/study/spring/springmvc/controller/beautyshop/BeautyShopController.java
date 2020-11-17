@@ -31,24 +31,25 @@ public class BeautyShopController {
         return "/beautyShop/menu";
     }
 
-    @GetMapping("/beautyShopList")
-    public String beautyShopList(Model model){
-        List<BeautyShop> beautyShops = beautyShopService.getBeautyShops();
-        model.addAttribute("shops",beautyShops);
-        return "/beautyShop/beautyShopList";
-    }
+//    @GetMapping("/beautyShopList")
+//    public String beautyShopList(Model model){
+//        List<BeautyShop> beautyShops = beautyShopService.getBeautyShops();
+//        model.addAttribute("shops",beautyShops);
+//        return "/beautyShop/beautyShopList";
+//    }
 
     @PostMapping("/saveOrderData")
     public String beautyShopListAfterOrder(@ModelAttribute Order order,
                                            @SessionAttribute("UserDB_id") Long UserDB_id){
         beautyShopService.saveOrder(order, UserDB_id);
         // service에서 order 나머지값들 세팅(저장) 한뒤 리스트로 다시 복귀
-        return "redirect:/beautyShopList";
+        return "redirect:/";
     }
 
     @GetMapping("/beautyShopOrder")
     public String beautyShopOrder(){
-
+        // 수정할거임
+//        beautyShopService.getOrder();
         return "/beautyShop/beautyShopOrder";
     }
 

@@ -11,44 +11,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%@ include file="/WEB-INF/includes/header.jsp" %>
+    <%@ include file="includes/header.jsp" %>
     <title>Wellcome Page</title>
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">미용실</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <c:choose>
-                    <c:when test="${not empty UserDB_id}">
-                        <li><a href="/memberEdit">회원정보 수정하기</a></li>
-                        <li><a href="/logOut">로그아웃</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li><a href="/loginForm">로그인 바로가기</a></li>
-                        <li><a href="/signUp">회원가입</a></li>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
-        </div>
-    </div>
-</nav>
+<%@include file="includes/navbar.jsp"%>
+<!-- contents zone -->
+<div class="container" style="margin-top:100px">
+    <c:choose>
+        <c:when test="${not empty shops}">
+            <c:forEach var="shop" items="${shops}">
+            <table border="1">
+                <th>번호</th>
+                <th>미용실 이름</th>
+                <th>미용실 주소</th>
+                <tr>
+                    <td>${shop.DB_Id}</td>
+                    <td><a href="/beautyShopDetailPage?id=${shop.DB_Id}">${shop.storeName}</a> </td>
+                    <td>${shop.local}</td>
+                </tr>
+            </table>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <h1>등록된 미용실이 없습니다.</h1>
+        </c:otherwise>
+    </c:choose>
+</div>
 
-<%@ include file="/WEB-INF/includes/footer.jsp" %>
+<%@ include file="includes/footer.jsp" %>
 
 </body>
 </html>

@@ -9,8 +9,11 @@
 <html>
 <head>
     <title>미용실 생성 폼!!!</title>
+    <%@ include file="/WEB-INF/includes/header.jsp"%>
 </head>
 <body>
+<%@ include file="/WEB-INF/includes/navbar.jsp"%>
+<div class="container" style="margin-top: 100px">
 <form action="/BeautyShop" method="post">
     <center>
     <table>
@@ -31,5 +34,7 @@
     <input type="submit" value="다음">
     </center>
 </form>
+</div>
+<%@include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>
