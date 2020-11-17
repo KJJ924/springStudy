@@ -48,13 +48,6 @@
     </div>
 </nav>
 
-<div class="container">
-
-    <div class="starter-template" style="align-content: center; margin:100px;">
-
-    </div>
-
-</div>
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
 
 </body>
