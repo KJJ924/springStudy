@@ -1,9 +1,9 @@
 package study.spring.springmvc.dto.beautyShop;
 
-import study.spring.springmvc.dto.member.Member;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Date;
 
 public class Order {
     private Long id;
@@ -11,20 +11,21 @@ public class Order {
     private String menuName;
     private Integer price;
     private Long memberId;
-    private Long desingerId;
+    private Long designerId;
     private LocalDateTime orderDate;
     private boolean cancel;
-    private LocalDateTime reservationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date reservationDate;
 
     public Order() {
     }
 
-    public Order(Long shopId, String menuName, Integer price, Long memberId, Long desingerId, LocalDateTime orderDate, boolean cancel, LocalDateTime reservationDate) {
+    public Order(Long shopId, String menuName, Integer price, Long memberId, Long designerId, LocalDateTime orderDate, boolean cancel, Date reservationDate) {
         this.shopId = shopId;
         this.menuName = menuName;
         this.price = price;
         this.memberId = memberId;
-        this.desingerId = desingerId;
+        this.designerId = designerId;
         this.orderDate = orderDate;
         this.cancel = cancel;
         this.reservationDate = reservationDate;
@@ -70,12 +71,12 @@ public class Order {
         this.memberId = memberId;
     }
 
-    public Long getDesingerId() {
-        return desingerId;
+    public Long getDesignerId() {
+        return designerId;
     }
 
-    public void setDesingerId(Long desingerId) {
-        this.desingerId = desingerId;
+    public void setDesignerId(Long designerId) {
+        this.designerId = designerId;
     }
 
     public LocalDateTime getOrderDate() {
@@ -94,11 +95,11 @@ public class Order {
         this.cancel = cancel;
     }
 
-    public LocalDateTime getReservationDate() {
+    public Date getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(LocalDateTime reservationDate) {
+    public void setReservationDate(Date reservationDate) {
         this.reservationDate = reservationDate;
     }
 }

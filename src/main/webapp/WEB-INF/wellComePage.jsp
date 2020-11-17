@@ -33,6 +33,16 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <c:choose>
+                    <c:when test="${not empty UserDB_id}">
+                        <li><a href="/memberEdit">회원정보 수정하기</a></li>
+                        <li><a href="/logOut">로그아웃</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/loginForm">로그인 바로가기</a></li>
+                        <li><a href="/signUp">회원가입</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>
@@ -41,19 +51,7 @@
 <div class="container">
 
     <div class="starter-template" style="align-content: center; margin:100px;">
-        <h1>Wellcome!</h1>
-        <p class="lead">
-            <c:choose>
-                <c:when test="${not empty UserDB_id}">
-                    <a href="/memberEdit">회원정보 수정하기</a><br>
-                    <a href="/logOut">로그아웃</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="/loginForm">로그인 바로가기</a><br>
-                    <a href="/signUp">회원가입</a>
-                </c:otherwise>
-            </c:choose>
-        </p>
+
     </div>
 
 </div>

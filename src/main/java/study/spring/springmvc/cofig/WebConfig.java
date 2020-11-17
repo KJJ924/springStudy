@@ -14,5 +14,7 @@ public class WebConfig  implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         List<String> urlList = Arrays.asList("/memberEdit","/beautyShopList","/beautyShopDetailPage");
         registry.addInterceptor(new MemberEditInterceptor()).addPathPatterns(urlList);
+
+        registry.addInterceptor(new CheckLoginSessionInterceptor()).addPathPatterns("/loginForm");
     }
 }

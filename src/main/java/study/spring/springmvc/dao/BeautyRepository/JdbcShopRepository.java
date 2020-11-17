@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import study.spring.springmvc.dto.beautyShop.BeautyShop;
 import study.spring.springmvc.dto.beautyShop.Designer;
 import study.spring.springmvc.dto.beautyShop.Menu;
@@ -107,9 +108,9 @@ public class JdbcShopRepository implements BeautyShopRepository {
 
     @Override
     public void orderSave(Order order) {
-
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
         jdbcInsert.withTableName("order_list").usingGeneratedKeyColumns("DB_iD");
+
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("Shop_id", order.getShopId());
         parameters.put("menu_name", order.getMenuName());
@@ -118,15 +119,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
         parameters.put("order_date", order.getOrderDate());
         parameters.put("cancel", order.isCancel());
         parameters.put("reservation_date", order.getReservationDate());
-
-
-//        parameters.put("menu", beautyShop.getMenu().getDB_id());
-
-        // 어떻게 저장해야될지  잘몰르겠음..
-//        parameters.put("Designer_list", beautyShop.getDesignerList());
-//        parameters.put("Member_list", beautyShop.getMemberList());
-        jdbcInsert.execute(parameters);
-
+        jdbcInsert.executeAndReturnKey(parameters);
     }
 
     @Override

@@ -39,10 +39,11 @@ public class BeautyShopController {
     }
 
     @PostMapping("/saveOrderData")
-    public String beautyShopListAfterOrder(@ModelAttribute Order order, @SessionAttribute Long UserDB_id, Model model){
+    public String beautyShopListAfterOrder(@ModelAttribute Order order,
+                                           @SessionAttribute("UserDB_id") Long UserDB_id){
         beautyShopService.saveOrder(order, UserDB_id);
         // service에서 order 나머지값들 세팅(저장) 한뒤 리스트로 다시 복귀
-        return "redirect:/beautyShop/beautyShopList";
+        return "redirect:/beautyShopList";
     }
 
     @GetMapping("/beautyShopOrder")

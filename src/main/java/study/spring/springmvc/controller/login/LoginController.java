@@ -46,7 +46,7 @@ public class LoginController {
             System.out.println("성공");
             session.setAttribute("UserDB_id", validation);
             System.out.println(validation);
-            return "redirect:/wellComePage";
+            return "redirect:/";
         }
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
