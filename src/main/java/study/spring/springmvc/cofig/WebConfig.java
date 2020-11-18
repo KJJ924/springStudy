@@ -13,7 +13,7 @@ public class WebConfig  implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         List<String> urlList = Arrays.asList("/memberEdit","/beautyShopDetailPage", "/beautyShopOrder", "/createBeautyShop",
-                "/createResultPage", "/designer", "/menu");
+                "/createResultPage", "/designer", "/menu", "/BeautyShop");
         registry.addInterceptor(new MemberEditInterceptor()).addPathPatterns(urlList);
 
         registry.addInterceptor(new CheckLoginSessionInterceptor()).addPathPatterns("/loginForm");
