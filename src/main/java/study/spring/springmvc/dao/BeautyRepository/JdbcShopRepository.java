@@ -15,6 +15,7 @@ import study.spring.springmvc.dto.beautyShop.Order;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
@@ -107,11 +108,25 @@ public class JdbcShopRepository implements BeautyShopRepository {
     }
 
     @Override
-    public List<Order> getOrderList() {
+    public List<Order> getOrderList(String memberID) {
         // 수정할거임
-        String sql = "select * from order_list where memberId = ?";
-
-        return null;
+        String sql = "select * from order_list where member_Id = ?";
+        return template.query(sql,orderRowMapper() ,memberID);
+    }
+    private RowMapper<Order> orderRowMapper(){
+        return (rs, rowNum) -> {
+            Order order = new Order();
+            order.setId(rs.getLong("DB_iD"));
+            order.setShopId(rs.getLong("Shop_id"));
+            order.setDesignerId(rs.getLong("designer_Id"));
+            order.setMenuName(rs.getString("menu_name"));
+            order.setPrice(rs.getInt("price"));
+            order.setCancel(rs.getBoolean("cancel"));
+            order.setOrderDate(rs.getObject("order_date", LocalDateTime.class));
+            order.setReservationDate(rs.getDate("reservation_date"));
+            order.setMemberId(rs.getString("member_id"));
+            return order;
+        };
     }
 
     @Override
@@ -125,6 +140,7 @@ public class JdbcShopRepository implements BeautyShopRepository {
         parameters.put("price", order.getPrice());
         parameters.put("member_id", order.getMemberId());
         parameters.put("order_date", order.getOrderDate());
+        parameters.put("designer_Id",order.getDesignerId());
         parameters.put("cancel", order.isCancel());
         parameters.put("reservation_date", order.getReservationDate());
         jdbcInsert.executeAndReturnKey(parameters);

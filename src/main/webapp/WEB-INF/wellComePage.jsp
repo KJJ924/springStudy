@@ -23,13 +23,15 @@
     <c:choose>
         <c:when test="${not empty shops}">
             <c:forEach var="shop" items="${shops}">
-            <table border="1">
-                <th>번호</th>
-                <th>미용실 이름</th>
-                <th>미용실 주소</th>
+            <table class="table  table-hover">
+                <tr>
+                    <th>번호</th>
+                    <th>미용실 이름</th>
+                    <th>미용실 주소</th>
+                </tr>
                 <tr>
                     <td>${shop.DB_Id}</td>
-                    <td><a href="/beautyShopDetailPage?id=${shop.DB_Id}">${shop.storeName}</a> </td>
+                    <td ><a href="/beautyShopDetailPage?id=${shop.DB_Id}">${shop.storeName}</a> </td>
                     <td>${shop.local}</td>
                 </tr>
             </table>

@@ -14,11 +14,11 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/includes/navbar.jsp"%>
-<div class="container" style="margin-top: 100px"
+<div class="container" style="margin-top: 100px">
 <form action="/saveOrderData" method="post">
     <input type="hidden" name="shopId" value="${beautyShop.DB_Id}">
-<h1>${beautyShop.storeName}</h1>
-    <table border="1">
+<h1 class="text-center">${beautyShop.storeName}</h1>
+    <table class="table">
         <tr>
             <th>미용실 이름</th>
             <th>미용실 주소</th>
@@ -31,14 +31,13 @@
         </tr>
     </table>
 <h2>메뉴판</h2>
-    <table border="1">
+    <table class="table">
         <tr>
             <th>선택</th>
             <th>이름</th>
             <th>가격</th>
         </tr>
         <c:forEach var="menu" items="${beautyShop.menu.menu}">
-
             <tr>
                 <%-- 메뉴 이름이랑 가격 동시에보내야하는데 당장 생각이 안나므로 그냥 히든으로 --%>
                 <input type="hidden" name="menuName" value="${menu.key}">
@@ -50,7 +49,7 @@
         </c:forEach>
     </table>
 <h3>미용사</h3>
-    <table border="1">
+    <table class="table">
         <tr>
             <th>선택</th>
             <th>ID</th>
@@ -67,8 +66,9 @@
         </c:forEach>
     </table>
     예약 날짜 : <input type='date' name='reservationDate'/>
-    <input type="submit" value="예약하기">
+    <input class="btn" type="submit" value="예약하기">
 </form>
+</div>
 <%@ include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>

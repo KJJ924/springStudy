@@ -41,6 +41,7 @@ create table order_list(
     member_id varchar(255),
     order_date DATETIME,
     cancel boolean,
-    reservation_date DATETIME
+    reservation_date DATETIME,
+    designer_Id LONG
 );
 

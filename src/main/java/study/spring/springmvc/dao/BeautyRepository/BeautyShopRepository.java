@@ -17,5 +17,5 @@ public interface BeautyShopRepository {
     List<Designer> getDesignerList(String shopName);
     List<Menu> getMenu(String shopName);
 
-    List<Order> getOrderList();
+    List<Order> getOrderList(String memberID);
 }

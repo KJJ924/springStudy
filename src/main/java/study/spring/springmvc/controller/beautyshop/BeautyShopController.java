@@ -19,7 +19,8 @@ import java.util.*;
 @Controller
 @SessionAttributes({"shop"})
 public class BeautyShopController {
-    private BeautyShopService beautyShopService;
+    private final BeautyShopService beautyShopService;
+
 
     @Autowired
     public BeautyShopController(BeautyShopService beautyShopService) {
@@ -37,21 +38,6 @@ public class BeautyShopController {
 //        model.addAttribute("shops",beautyShops);
 //        return "/beautyShop/beautyShopList";
 //    }
-
-    @PostMapping("/saveOrderData")
-    public String beautyShopListAfterOrder(@ModelAttribute Order order,
-                                           @SessionAttribute("UserDB_id") Long UserDB_id){
-        beautyShopService.saveOrder(order, UserDB_id);
-        // service에서 order 나머지값들 세팅(저장) 한뒤 리스트로 다시 복귀
-        return "redirect:/";
-    }
-
-    @GetMapping("/beautyShopOrder")
-    public String beautyShopOrder(){
-        // 수정할거임
-//        beautyShopService.getOrder();
-        return "/beautyShop/beautyShopOrder";
-    }
 
     @GetMapping("/beautyShopDetailPage")
     public String beautyShopDetailPage(@RequestParam(name="id") Long beautyDB_id, Model model){

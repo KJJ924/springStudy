@@ -19,17 +19,17 @@ public class LoginService implements ILoginService{
 
 
     @Override
-    public Long validation(Member member) {
+    public String validation(Member member) {
         List<Member> members = repository.allMembers();
         for (Member member1: members) {
             if (member1.getId().equals(member.getId())) {
                 System.out.println("id통과");
                 if (member1.getPw().equals(member.getPw())) {
                     System.out.println("pw통과");
-                    return member1.getDB_ID();
+                    return member1.getId();
                 }
             }
         }
-        return -1L;
+        return "false";
     }
 }

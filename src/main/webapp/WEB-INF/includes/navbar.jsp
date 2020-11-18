@@ -21,15 +21,16 @@
             <ul class="nav navbar-nav">
                 <li><a href="/BeautyShop">미용실 등록하기</a></li>
                 <li><a href="/beautyShopOrder">내 예약현황</a></li>
-                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
                 <c:choose>
                     <c:when test="${not empty UserDB_id}">
-                        <li class=""><a href="/memberEdit">회원정보 수정하기</a></li>
-                        <li class=""><a href="/logOut">로그아웃</a></li>
+                        <li class="pull-right"><a href="/memberEdit">회원정보 수정하기</a></li>
+                        <li class="pull-right"><a href="/logOut">로그아웃</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class=""><a href="/loginForm">로그인 바로가기</a></li>
-                        <li class=""><a href="/signUp">회원가입</a></li>
+                        <li class="pull-right"><a href="/loginForm">로그인 바로가기</a></li>
+                        <li class="pull-right"><a href="/signUp">회원가입</a></li>
                     </c:otherwise>
                 </c:choose>
             </ul>

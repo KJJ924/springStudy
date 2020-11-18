@@ -47,9 +47,9 @@ public class LoginController {
 
     @PostMapping("/loginPost")
     public String loginValidation(HttpSession session, Member member, HttpServletResponse response) throws IOException {
-        Long validation = service.validation(member);
-        if (validation!=-1L) {
-            SessionConfig.getSessionIdCheck("UserDB_id", String.valueOf(validation));
+        String validation = service.validation(member);
+        if (!validation.equals("false")) {
+            SessionConfig.getSessionIdCheck("UserDB_id", validation);
             System.out.println("성공");
             session.setAttribute("UserDB_id", validation);
             System.out.println(validation);

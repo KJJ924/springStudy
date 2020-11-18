@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Service
 public class BeautyShopService {
@@ -23,13 +22,12 @@ public class BeautyShopService {
         this.beautyShopRepository = beautyShopRepository;
     }
 
-    public List<Order> getOrder(){
-        // 수정할거임
-        List<Order> orderList = beautyShopRepository.getOrderList();
-        return null;
+
+    public List<Order> getOrder(String memberID){
+        return beautyShopRepository.getOrderList(memberID);
     }
 
-    public void saveOrder(Order order, Long UserDB_id){
+    public void saveOrder(Order order, String UserDB_id){
         order.setMemberId(UserDB_id);
         order.setOrderDate(LocalDateTime.now());
         beautyShopRepository.orderSave(order);

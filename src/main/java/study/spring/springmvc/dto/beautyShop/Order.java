@@ -10,7 +10,7 @@ public class Order {
     private Long shopId;
     private String menuName;
     private Integer price;
-    private Long memberId;
+    private String memberId;
     private Long designerId;
     private LocalDateTime orderDate;
     private boolean cancel;
@@ -20,7 +20,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long shopId, String menuName, Integer price, Long memberId, Long designerId, LocalDateTime orderDate, boolean cancel, Date reservationDate) {
+    public Order(Long shopId, String menuName, Integer price, String memberId, Long designerId, LocalDateTime orderDate, boolean cancel, Date reservationDate) {
         this.shopId = shopId;
         this.menuName = menuName;
         this.price = price;
@@ -63,11 +63,11 @@ public class Order {
         this.price = price;
     }
 
-    public Long getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Long memberId) {
+    public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
 
@@ -102,4 +102,5 @@ public class Order {
     public void setReservationDate(Date reservationDate) {
         this.reservationDate = reservationDate;
     }
+
 }

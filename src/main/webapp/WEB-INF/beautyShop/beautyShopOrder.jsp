@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>내 예약현황</title>
@@ -14,7 +16,10 @@
 <body>
 <%@ include file="/WEB-INF/includes/navbar.jsp"%>
 버튼하나 따로 만들어서 내 예약현황 볼수있게끔 만들예정.
-
+<c:forEach items="${orderList}" var="order">
+    ${order.menuName}
+    ${order.orderDate}
+</c:forEach>
 <%@ include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>
