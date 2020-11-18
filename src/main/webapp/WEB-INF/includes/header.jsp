@@ -12,5 +12,7 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link href="/resources/css/bootstrap.css" rel="stylesheet">
-<link href="/resources/css/bootstrap-theme.css" rel="stylesheet">
+<%--<link href="/resources/css/bootstrap.css" rel="stylesheet">--%>
+<%--<link href="/resources/css/bootstrap-theme.css" rel="stylesheet">--%>
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
