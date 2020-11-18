@@ -15,11 +15,27 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/includes/navbar.jsp"%>
-버튼하나 따로 만들어서 내 예약현황 볼수있게끔 만들예정.
-<c:forEach items="${orderList}" var="order">
-    ${order.menuName}
-    ${order.orderDate}
-</c:forEach>
+<main role="main">
+    <br><br><br><br><br><br><br><br><br>
+    <div class="container text-center">
+        <!-- 디자인 뭘로할지 고민중; 추천좀해주세여 -->
+        <!-- 미용실 이름, 미용사 이름 필요.. 수정 예정. -->
+        <c:if test="${empty orderList}">
+            <blockquote class="blockquote text-center">
+                <p class="mb-0">예약 건수가 없습니다.</p>
+                <footer class="blockquote-footer">관리자</footer>
+            </blockquote>
+        </c:if>
+    <c:forEach items="${orderList}" var="order">
+        미용실 : ${order.shopId}<br>
+        미용사 : ${order.designerId}<br>
+        시술 메뉴 : ${order.menuName}<br>
+        가격 : ${order.price}<br>
+        시술예정 날짜 : ${order.reservationDate}<br>
+        예약하신 날짜 : ${order.orderDate}<br>
+    </c:forEach>
+    </div>
+</main>
 <%@ include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>
