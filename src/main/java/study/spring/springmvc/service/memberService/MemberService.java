@@ -22,7 +22,7 @@ public class MemberService implements IMemberService{
     }
 
     @Override
-    public Member getMember(Long id) {
+    public Member getMember(String id) {
         Member member = repository.getMember(id);
         if(member==null){
             System.out.println("해당하는 Member가 없습니다.");
@@ -36,7 +36,7 @@ public class MemberService implements IMemberService{
     }
 
     @Override
-    public void editMember(Member member, Long DB_Id) {
+    public void editMember(Member member, String DB_Id) {
         if(member.getName() !=null && member.getDB_ID() !=null && member.getId() !=null){
             repository.editMember(member,DB_Id);
         }

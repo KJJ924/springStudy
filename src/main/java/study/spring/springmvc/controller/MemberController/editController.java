@@ -22,7 +22,7 @@ public class editController {
     }
 
     @GetMapping("/memberEdit")
-    public String showEditPage(@SessionAttribute("UserDB_id") Long DB_id , Model model){
+    public String showEditPage(@SessionAttribute("UserDB_id") String DB_id , Model model){
 //        Long DB_id = (Long) session.getAttribute("UserDB_id");
         Member member = service.getMember(DB_id);
         model.addAttribute("member",member);
@@ -30,7 +30,7 @@ public class editController {
     }
 
     @PostMapping("/editMember")
-    public String editMember(@RequestParam String pw, @SessionAttribute("UserDB_id") Long DB_id){
+    public String editMember(@RequestParam String pw, @SessionAttribute("UserDB_id") String DB_id){
 //        Long DB_id = (Long) session.getAttribute("UserDB_id");
         Member member = service.getMember(DB_id);
         member.setPw(pw);

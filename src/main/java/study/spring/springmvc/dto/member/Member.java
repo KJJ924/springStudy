@@ -9,26 +9,30 @@ import javax.validation.constraints.NotNull;
 // Model(Business Logic)
 public class Member {
 
-    Long DB_ID;
+    private Long DB_ID;
     @NotNull
     @NotEmpty
-    String id;
+    private String id;
     @NotNull
     @NotEmpty
-    String pw;
+    private String pw;
     @NotNull
     @NotEmpty
-    String name;
+    private String name;
     @NotNull
     @NotEmpty
     @Min(1)
-    String age;
+    private String age;
 
-    public Member( @NotNull @NotEmpty String id, @NotNull @NotEmpty String pw, @NotNull @NotEmpty String name, @NotNull @NotEmpty @Min(1) String age) {
+    private Role role;
+
+    public Member( @NotNull @NotEmpty String id, @NotNull @NotEmpty String pw, @NotNull @NotEmpty String name
+            , @NotNull @NotEmpty @Min(1) String age,Role role) {
         this.id = id;
         this.pw = pw;
         this.name = name;
         this.age = age;
+        this.role = role;
     }
 
     public Member() {
@@ -74,4 +78,11 @@ public class Member {
         this.name = name;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

@@ -85,7 +85,7 @@ public class BeautyShopController {
         // 서비스 ->shop 넘겨주면 알아서 shop 있는 객체들 나뉘어서 저장하는 흐름으로 개발.
         beautyShopService.saveFactoryBeautyShopService(shop);
 
-        return "redirect:/wellComePage";
+        return "redirect:/";
     }
     @GetMapping("/registerDesigner")
     public String registerDesignerForm(){

@@ -9,6 +9,7 @@ create table Member(
     pw varchar(255),
     name varchar(255),
     age varchar(255),
+    role varchar (255),
     primary key(DB_ID)
 );
 

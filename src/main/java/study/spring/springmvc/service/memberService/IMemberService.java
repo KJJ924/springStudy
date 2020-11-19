@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IMemberService {
     void memberSave(Member member);
-    Member getMember(Long id);
+    Member getMember(String id);
     List<Member> getMembers();
-    void editMember(Member member , Long DB_Id);
+    void editMember(Member member , String DB_Id);
 
 }

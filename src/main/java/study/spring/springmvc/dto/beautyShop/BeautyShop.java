@@ -16,7 +16,6 @@ public class BeautyShop {
     private List<Member> memberList;
     //one to one 관계
     private Menu menu;
-
     public BeautyShop() {
     }
 

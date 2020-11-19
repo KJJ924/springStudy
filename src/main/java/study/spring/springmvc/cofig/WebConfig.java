@@ -1,6 +1,7 @@
 package study.spring.springmvc.cofig;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,5 +18,10 @@ public class WebConfig  implements WebMvcConfigurer {
         registry.addInterceptor(new MemberEditInterceptor()).addPathPatterns(urlList);
 
         registry.addInterceptor(new CheckLoginSessionInterceptor()).addPathPatterns("/loginForm");
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new StringToRoleConverter());
     }
 }

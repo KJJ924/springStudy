@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import study.spring.springmvc.dto.member.Member;
+import study.spring.springmvc.dto.member.Role;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -35,14 +36,15 @@ public class MemberJdbcRepository implements  MemberRepository {
         parameters.put("pw",member.getPw());
         parameters.put("name",member.getName());
         parameters.put("age",member.getAge());
+        parameters.put("role",member.getRole());
 
        jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
     }
 
     @Override
-    public Member getMember(Long id) {
+    public Member getMember(String id) {
         System.out.println(id);
-        List<Member> query = template.query("select * from member where db_id = ?", memberRowMapper(),id);
+        List<Member> query = template.query("select * from member where id = ?", memberRowMapper(),id);
         // findAny 리턴 타입 Optional 로 리턴하는 게 안전하긴함 -> NULL 값 리턴할 수 도 있어서.
         return query.stream().findAny().get();
     }
@@ -53,9 +55,8 @@ public class MemberJdbcRepository implements  MemberRepository {
     }
 
     @Override
-    public Long editMember(Member member, Long id) {
-        template.update("update Member set pw = ? where DB_Id = ?", member.getPw(), id);
-        return id;
+    public Long editMember(Member member, String id) {
+        return Long.valueOf(template.update("update Member set pw = ? where id = ?", member.getPw(), id));
     }
 
     private RowMapper<Member> memberRowMapper(){
@@ -66,6 +67,8 @@ public class MemberJdbcRepository implements  MemberRepository {
             member.setPw(resultSet.getString("PW"));
             member.setName(resultSet.getString("NAME"));
             member.setAge(resultSet.getString("AGE"));
+            String role = resultSet.getString("role");
+            member.setRole(Role.valueOf(role));
             return member;
         };
     }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MemberRepository {
     void save(Member member);
-    Member getMember(Long id);
+    Member getMember(String id);
     List<Member> allMembers();
-    Long editMember(Member member,Long id);
+    Long editMember(Member member,String id);
 }

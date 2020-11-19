@@ -41,6 +41,9 @@
         <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required>
         <label for="age" class="">Age</label>
         <input type="number" name="age" id="age" class="form-control" placeholder="Your age" required>
+        <label class="">너의 신분은 ?</label>
+        <label><input type="radio" name="Role" value="GUEST"> 일반 회원</label>
+        <label><input type="radio" name="Role" value="MANAGER">미용실 점장</label>
         <a href="/loginForm">이미 아이디가 있어요!</a><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button>
     </form>

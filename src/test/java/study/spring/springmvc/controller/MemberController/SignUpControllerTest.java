@@ -32,10 +32,11 @@ class SignUpControllerTest {
                 .param("name","JaeJoon")
                 .param("id","kjj")
                 .param("age","25")
-                .param("pw","123"))
+                .param("pw","123")
+                .param("role","MANAGER"))
         .andDo(print())
         .andExpect(redirectedUrl("/signUpResult"));
-        Member member = repository.getMember(1L);
+        Member member = repository.getMember("kjj");
         assertThat(member.getName()).isEqualTo("JaeJoon");
     }
 
